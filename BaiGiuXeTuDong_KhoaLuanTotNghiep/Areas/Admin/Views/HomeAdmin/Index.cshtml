@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@*<h2>Index</h2>*@
+
+<!-- main -->
+@*<div class="main">*@
+    <h3 style="font-weight: 500; color: #A6A9FF; text-align: center; font-size: 30px;">QUẢN LÝ BÃI GIỮ XE</h3>
+    <!--cards-->
+    <div class="cardBox">
+        <div class="card">
+            <div>
+                <div class="numbers">50</div>
+                <div class="cardName">Xe đang gửi</div>
+            </div>
+            <div class="iconBx">
+                <ion-icon name="eye-outline"></ion-icon>
+            </div>
+        </div>
+        <div class="card">
+            <div>
+                <div class="numbers">07</div>
+                <div class="cardName">Khu vực trống</div>
+            </div>
+            <div class="iconBx">
+                <ion-icon name="create-outline"></ion-icon>
+            </div>
+        </div>
+    </div>
+    <!-- chart -->
+    <div class="charts">
+        <div class="chart col-12">
+            <h2 style="font-weight: 500; color: #A6A9FF; font-size: 30px;">Biểu đồ thống kê lượt gửi</h2>
+            <canvas id="lineChart" style="width: 100%; height: 450px; margin-right: 20px"></canvas>
+        </div>
+    </div>
+@*</div>*@
+
+@*@section script{
+    <script>
+
+    </script>
+}*@

@@ -1,0 +1,168 @@
+﻿@model IEnumerable<BaiGiuXeTuDong_KhoaLuanTotNghiep.Models.DangKyThang>
+
+@{
+    ViewBag.Title = "ĐĂNG KÝ GỬI XE THÁNG ONLINE";
+    Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
+}
+
+<div class="row" style="padding-right: 0;">
+    <div class="formInfo">
+        <form>
+            <div class="form-group col-md-12">
+                <label for="">Họ và tên:</label>
+                <input type="text" class="form-control" id="" placeholder="Nguyễn Văn A">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="">Biển số xe:</label>
+                    <input type="text" class="form-control" id="" placeholder="81A-12345">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputState">Loại xe:</label>
+                    <select id="inputState" class="form-control">
+                        <option selected>Xe máy</option>
+                        <option>Xe đạp</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="">Số điện thoại:</label>
+                    <input type="text" class="form-control" id="inputCity" placeholder="0123943245">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Email:</label>
+                    <input type="email" class="form-control" id="inputEmail4"
+                           placeholder="nguyenvana@gmail.com">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputState">Thời hạn đăng ký (Tháng):</label>
+                    <div>
+                        <span class="minus"
+                              style="width: 30px; height: 30px; text-align: center; border: 1px solid #e8f8ff; background-color: #eeeefe;">-</span>
+                        <span type="text"
+                              style="width: 30px; height: 30px; text-align: center; border: 1px solid #e8f8ff;"
+                              class="num">01</span>
+                        <span class="plus"
+                              style="width: 30px; height: 30px; text-align: center; border: 1px solid #e8f8ff;  background-color: #eeeefe;">+</span>
+                    </div>
+                    <!-- <select id="inputState" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select> -->
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputState">Phương thức thanh toán:</label>
+                    <select id="inputState" class="form-control">
+                        <option selected>Thanh toán bằng ví Momo</option>
+                        <option>Thanh toán online bằng Stripe</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn"
+                    style="background: linear-gradient(#a6a9ff, #55ccff); color: #fff; margin-left: 15px;">
+                Đăng
+                ký
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+        const plus = document.querySelector(".plus"),
+            minus = document.querySelector(".minus"),
+            num = document.querySelector(".num");
+
+        let a = 1;
+        plus.addEventListener("click", () => {
+            a++;
+            a = (a < 10) ? "0" + a : a;
+            num.innerText = a;
+            console.log(a);
+        });
+        minus.addEventListener("click", () => {
+            if (a > 1) {
+                a--;
+                a = (a < 10) ? "0" + a : a;
+            }
+            num.innerText = a;
+            console.log(a);
+        });
+</script>
+@*<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.HoTenKH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BienSoXe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThoiGianDangKy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoaiXe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SDT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThoiHan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoaiThanhToan.TenLoai)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoTenKH)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BienSoXe)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThoiGianDangKy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoaiXe)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TrangThai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SDT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThoiHan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoaiThanhToan.TenLoai)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MaDangKy }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MaDangKy }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MaDangKy })
+        </td>
+    </tr>
+}
+
+</table>*@

@@ -1,0 +1,83 @@
+﻿@model IEnumerable<BaiGiuXeTuDong_KhoaLuanTotNghiep.Models.LichSuXe>
+
+@{
+    ViewBag.Title = "SearchTraXe";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .row-table {
+        color: #55ccff;
+    }
+</style>
+<h3 style="font-weight: 500; color: #A6A9FF; text-align: center; font-size: 30px;">QUẢN LÝ TRẢ XE - TÌM KIẾM</h3>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+@using (Html.BeginForm("SearchTraXe", "Search", FormMethod.Get))
+{
+    <input type="text" name="search" placeholder="Nhập lượt ra ...." style="width: 200px; height: 30px" />
+    <input type="submit" name="submit" value="Tìm kiếm" style="background: linear-gradient(#A6A9FF,#55ccff); border-color: #55ccff; color:#fff; width: 90px; height: 30px;border-style: unset; border-radius:5px;" />
+}
+<table class="table" style="margin-top: 20px">
+    <tr style="color: #A6A9FF">
+        <th scope="col">#</th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.MaLichSu)*@
+            Mã lịch sử
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.LuotVao)*@
+            Lượt vào
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.LuotRa)*@
+            Lượt ra
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.ThanhToan.MaThanhToan)*@
+            Mã thanh toán
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.TheXeNgay.MaTheXeNgay)*@
+            Mã thẻ ngày
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.TheXeThang.MaTheXeThang)*@
+            Mã thẻ tháng
+        </th>
+        <th></th>
+    </tr>
+    @{int i = 0;}
+    @foreach (var item in Model)
+    {
+        i++;
+        <tr>
+            <td scope="row" class="row-table">@i</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaLichSu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LuotVao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LuotRa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThanhToan.MaThanhToan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TheXeNgay.MaTheXeNgay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TheXeThang.MaTheXeThang)
+            </td>
+            <td>
+                
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.ActionLink("Quay lại danh sách xe", "Index", "LichSuXes", null, new { style = "text-decoration:none; color: #55ccff;text-align:center;font-size: 14px;" })

@@ -1,0 +1,61 @@
+﻿@model BaiGiuXeTuDong_KhoaLuanTotNghiep.Models.Xe
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    label {
+        color: #55ccff
+    }
+</style>
+<h3 style="font-weight: 500; color: #A6A9FF; text-align: center; font-size: 30px;">Xóa thông tin xe</h3>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @*@Html.DisplayNameFor(model => model.BienSo)*@
+            <label class="control-label col-md-2">Biển số xe</label>
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BienSo)
+        </dd>
+        <dt>
+            @*@Html.DisplayNameFor(model => model.HinhAnh)*@
+            <label class="control-label col-md-2">Hình ảnh</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HinhAnh)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.LoaiXe.TenLoaiXe)*@
+            <label class="control-label col-md-2">Mã Loại Xe</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiXe.TenLoaiXe)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.TheXeNgay.MaTheXeNgay)*@
+            <label class="control-label col-md-2">Mã Thẻ Xe</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TheXeNgay.MaTheXeNgay)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default" style="background: linear-gradient(#A6A9FF,#55ccff); border-color: #55ccff; color:#fff; width: 90px; height: 30px;border-style: unset; border-radius:5px;"/> |
+            @Html.ActionLink("Quay lại", "Index", null, new { style = "text-decoration:none; color: #55ccff;text-align:center;font-size: 14px;" })
+        </div>
+    }
+</div>

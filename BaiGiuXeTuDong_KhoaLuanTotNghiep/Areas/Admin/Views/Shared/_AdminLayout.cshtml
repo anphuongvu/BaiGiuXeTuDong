@@ -1,0 +1,162 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAITAN - Bãi giữ xe tự động</title>
+    <link href="~/Areas/Admin/assets/css/style.css" rel="stylesheet" />
+    <!-- boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+            <!-- <i class='bx bx-camera-movie' ></i> -->
+            <img src="~/Areas/Admin/assets/img/logoXe.png" alt="" height="50px" width="100px" />
+            <span class="logo-name">KAIAN</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="@Url.Action("Index", "HomeAdmin")">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="link_name">Trang chủ</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a href="" class="link_name">Trang chủ</a></li>
+                </ul>
+            </li>
+            <!-- <li>
+                <div class="icon-link">
+                    <a href="" class="name">
+                        <i class='bx bx-user-circle'></i>
+                        <span class="link_name">Quản lý nhận xe</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a href="" class="link_name">Quản lý nhận xe</a></li>
+                </ul>
+            </li> -->
+            <li>
+                <a href="@Url.Action("Index", "Xes")">
+                    <i class='bx bxs-edit'></i>
+                    <span class="link_name">Quản lý nhận xe</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a href="" class="link_name">Quản lý nhận xe</a></li>
+                </ul>
+            </li>
+            <!-- <li>
+                <div class="icon-link">
+                    <a href="" class="name">
+                        <i class='bx bx-film' ></i>
+                        <span class="link_name">Quản lý trả xe</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a href="" class="link_name">Quản lý trả xe</a></li>
+                </ul>
+            </li> -->
+            <li>
+                <a href="@Url.Action("Index", "LichSuXes")">
+                    <i class='bx bx-link-external'></i>
+                    <span class="link_name">Quản lý trả xe</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a href="" class="link_name">Quản lý trả xe</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="">
+                    <i class='bx bx-detail'></i>
+                    <span class="link_name">Quản lý sự cố</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a href="" class="link_name">Quản lý sự cố</a></li>
+                    <li><a href="">Mất xe</a></li>
+                    <li><a href="">Mất thẻ gửi xe</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="icon-link">
+                    <a href="">
+                        <i class='bx bx-money-withdraw'></i>
+                        <span class="link_name">Quản lý doanh thu</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a href="" class="link_name">Quản lý doanh thu</a></li>
+                    <li><a href="">Nhắc nhở đóng tiền</a></li>
+                    <li><a href="">Các loại thanh toán</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="icon-link">
+                    <a href="">
+                        <i class='bx bx-credit-card'></i>
+                        <span class="link_name">Quản lý thanh toán</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a href="" class="link_name">Quản lý thanh toán</a></li>
+                    <li><a href="">Thanh toán bằng thẻ</a></li>
+                    <li><a href="">Thanh toán qua momo</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "DangKyThangs")">
+                    <i class='bx bx-user-plus'></i>
+                    <span class="link_name">Quản lý đăng ký</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a href="" class="link_name">Quản lý đăng ký</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="profile-details">
+            <div class="profile-content">
+                <img src="~/Areas/Admin/assets/img/Logo.png" />
+            </div>
+            <div class="name-job">
+                <div class="profile_name">An Vũ</div>
+                <div class="job">Admin</div>
+            </div>
+            <i class='bx bx-log-out'></i>
+        </div>
+    </div>
+    <div class="main">
+        @RenderBody()
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="~/Areas/Admin/js/chart.js"></script>
+    <script>
+        let arrow = document.querySelectorAll(".arrow");
+
+
+        for (var i = 0; i < arrow.length; i++) {
+            arrow[i].addEventListener("click", (e) => {
+                let arrowParent = e.target.parentElement.parentElement;
+                console.log(arrowParent);
+                arrowParent.classList.toggle("showMenu");
+            });
+        }
+
+        let sidebar = document.querySelector(".sidebar");
+        console.log(sidebar);
+    </script>
+</body>
+</html>
+

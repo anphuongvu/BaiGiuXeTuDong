@@ -1,0 +1,130 @@
+﻿@model PagedList.IPagedList<BaiGiuXeTuDong_KhoaLuanTotNghiep.Models.Xe>
+@*@model IEnumerable<BaiGiuXeTuDong_KhoaLuanTotNghiep.Models.Xe>*@
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@using PagedList;
+@using PagedList.Mvc;
+
+<style>
+    .pagination > .active > a,
+    .pagination > .active > a:focus,
+    .pagination > .active > a:hover,
+    .pagination > .active > span,
+    .pagination > .active > span:focus,
+    .pagination > .active > span:hover {
+        background: linear-gradient(#a6a9ff, #55ccff);
+        color: #fff;
+        border: none;
+    }
+</style>
+
+<h3 style="font-weight: 500; color: #A6A9FF; text-align: center; font-size: 30px;">QUẢN LÝ NHẬN XE - TÌM KIẾM</h3>
+
+@using (Html.BeginForm("Index", "Search", FormMethod.Get))
+{
+    <input type="text" name="search" placeholder="Nhập biển số xe ...." style="width: 200px; height: 30px" />
+    <input type="submit" name="submit" value="Tìm kiếm" style="background: linear-gradient(#A6A9FF,#55ccff); border-color: #55ccff; color:#fff; width: 90px; height: 30px;border-style: unset; border-radius:5px;" />
+}
+
+<table class="table" style="margin-top: 20px">
+    <tr style="color: #A6A9FF">
+        <th scope="col">#</th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().BienSo)
+            @*Biển số xe*@
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().HinhAnh)
+            @*Hình ảnh*@
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().LoaiXe.TenLoaiXe)
+            @*Tên loại xe*@
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().TheXeNgay.MaTheXeNgay)
+            @*Mã thẻ xe ngày*@
+        </th>
+        <th></th>
+    </tr>
+    @{int i = 0;}
+    @foreach (var item in Model)
+    {
+        i++;
+        <tr>
+
+            <td scope="row" class="row-table">@i</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BienSo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HinhAnh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoaiXe.TenLoaiXe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TheXeNgay.MaTheXeNgay)
+            </td>
+            <td>
+                @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.BienSo }, new { style = "text-decoration:none; color: #55ccff;text-align:center;font-size: 14px;" }) |
+                @Html.ActionLink("Chi tiết", "Details", new { id = item.BienSo }, new { style = "text-decoration:none; color: #55ccff;text-align:center;font-size: 14px;" }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.BienSo }, new { style = "text-decoration:none; color: #55ccff;text-align:center;font-size: 14px;" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<hr />
+
+<!-- pagination -->
+
+<div class="text-right" style="margin-right: 0px;">
+    @Html.PagedListPager((IPagedList)Model, p => Url.Action("Index", new { p }))
+</div>
+
+@Html.ActionLink("Quay lại danh sách xe", "Index", "Xes", null, new { style = "text-decoration:none; color: #55ccff;text-align:center;font-size: 14px;" })
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+
+
+    <table class="table">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.HinhAnh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LoaiXe.TenLoaiXe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TheXeNgay.MaTheXeNgay)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HinhAnh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoaiXe.TenLoaiXe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TheXeNgay.MaTheXeNgay)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.BienSo }) |
+                @Html.ActionLink("Details", "Details", new { id=item.BienSo }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.BienSo })
+            </td>
+        </tr>
+    }
+
+    </table>*@

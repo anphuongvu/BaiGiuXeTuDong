@@ -1,0 +1,59 @@
+﻿@model BaiGiuXeTuDong_KhoaLuanTotNghiep.Models.LichSuXe
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LichSuXe</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LuotVao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LuotVao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LuotRa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LuotRa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThanhToan.MaThanhToan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThanhToan.MaThanhToan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TheXeNgay.MaTheXeNgay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TheXeNgay.MaTheXeNgay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TheXeThang.MaTheXeThang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TheXeThang.MaTheXeThang)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaLichSu }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,65 @@
+﻿@model BaiGiuXeTuDong_KhoaLuanTotNghiep.Models.LichSuXe
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>LichSuXe</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LuotVao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LuotVao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LuotRa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LuotRa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThanhToan.MaThanhToan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThanhToan.MaThanhToan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TheXeNgay.MaTheXeNgay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TheXeNgay.MaTheXeNgay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TheXeThang.MaTheXeThang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TheXeThang.MaTheXeThang)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

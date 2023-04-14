@@ -1,0 +1,136 @@
+﻿@*@model IEnumerable<BaiGiuXeTuDong_KhoaLuanTotNghiep.Models.LichSuXe>*@
+@model IPagedList<BaiGiuXeTuDong_KhoaLuanTotNghiep.Models.LichSuXe>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@using PagedList;
+@using PagedList.Mvc;
+<style>
+    .row-table {
+        color: #55ccff;
+    }
+
+    .pagination > .active > a,
+    .pagination > .active > a:focus,
+    .pagination > .active > a:hover,
+    .pagination > .active > span,
+    .pagination > .active > span:focus,
+    .pagination > .active > span:hover {
+        background: linear-gradient(#a6a9ff, #55ccff);
+        color: #fff;
+        border: none;
+    }
+</style>
+<h3 style="font-weight: 500; color: #A6A9FF; text-align: center; font-size: 30px;">QUẢN LÝ TRẢ XE</h3>
+
+<div class="row" style="display: flex">
+    <div class="col-sm-6" style=" display: flex; align-items: center;">
+        <h4 style="color: #A6A9FF; margin-right: 50px;"><b>Tháng</b></h4>
+        <select id="inputState" class="form-control" style="background: linear-gradient(#a6a9ff, #55ccff); color: white; border: none; font-size: 14px; width: 70px;">
+            <option style="color: black" selected>2</option>
+            <option style="color: black">3</option>
+            <option style="color: black">4</option>
+            <option style="color: black">5</option>
+        </select>
+    </div>
+    <div class="col-sm-6" style="display: block;">
+        <div class="row" style="display: flex; align-items: center;">
+            <div class="col-sm-9" style=" align-content: center; text-align: center; justify-content:center">
+                @*<div class="input-group">
+                        <input type="text" class="form-control" placeholder="Tìm kiếm" id="txtSearch" />
+                        <div class="input-group-btn">
+                            <button class="btn btn-warning" type="submit" id="btnSearch" style="background: linear-gradient(#A6A9FF,#55ccff); border-color: #55ccff;">
+                                <i class='bx bx-search' style="color:white"></i>
+                            </button>
+                        </div>
+                    </div>*@
+                @using (Html.BeginForm("SearchTraXe", "Search", FormMethod.Get))
+                {
+                    <input type="text" name="search" placeholder="Nhập lượt ra ...." style="width: 200px; height: 30px" />
+                    <input type="submit" name="submit" value="Tìm kiếm" style="background: linear-gradient(#A6A9FF,#55ccff); border-color: #55ccff; color:#fff; width: 90px; height: 30px;border-style: unset; border-radius:5px;" />
+                }
+            </div>
+            <div class="col-sm-3">
+                <div style="width:90px; height: 30px; background: linear-gradient(#a6a9ff, #55ccff) ; text-align:center; border-radius:5px; margin:20px 0; padding-top: 5px;">
+                    <p>
+                        @Html.ActionLink("Thêm mới", "Create", null, new { style = "text-decoration:none; color: #fff;text-align:center;font-size: 14px;" })
+                        @*<a href="ThemMoiNhanXe.html" style="text-decoration: none; text-align: center; color: #fff; font-size: 14px;">Thêm mới</a>*@
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<table class="table">
+    <tr style="color: #A6A9FF">
+        <th scope="col">#</th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.MaLichSu)*@
+            Mã lịch sử
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.LuotVao)*@
+            Lượt vào
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.LuotRa)*@
+            Lượt ra
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.ThanhToan.MaThanhToan)*@
+            Mã thanh toán
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.TheXeNgay.MaTheXeNgay)*@
+            Mã thẻ ngày
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.TheXeThang.MaTheXeThang)*@
+            Mã thẻ tháng
+        </th>
+        <th></th>
+    </tr>
+    @{int i = 0;}
+    @foreach (var item in Model)
+    {
+        i++;
+        <tr>
+            <td scope="row" class="row-table">@i</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaLichSu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LuotVao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LuotRa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThanhToan.MaThanhToan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TheXeNgay.MaTheXeNgay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TheXeThang.MaTheXeThang)
+            </td>
+            <td>
+                @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.MaLichSu }, new { style = "text-decoration:none; color: #55ccff;text-align:center;font-size: 14px;" }) |
+                @Html.ActionLink("Chi tiết", "Details", new { id = item.MaLichSu }, new { style = "text-decoration:none; color: #55ccff;text-align:center;font-size: 14px;" }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.MaLichSu }, new { style = "text-decoration:none; color: #55ccff;text-align:center;font-size: 14px;" })
+            </td>
+        </tr>
+    }
+
+</table>
+<hr />
+<!-- pagination -->
+
+<div class="text-right" style="margin-right: 0px;">
+    @Html.PagedListPager((IPagedList)Model, p => Url.Action("Index", new { p }))
+</div>

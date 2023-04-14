@@ -1,0 +1,91 @@
+﻿@model BaiGiuXeTuDong_KhoaLuanTotNghiep.Models.LichSuXe
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    label {
+        color: #55ccff
+    }
+</style>
+<h3 style="font-weight: 500; color: #A6A9FF; text-align: center; font-size: 30px;">Chỉnh sửa thông tin</h3>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @*@Html.HiddenFor(model => model.MaLichSu)*@
+<div class="form-group">
+    @*@Html.LabelFor(model => model.MaLichSu, htmlAttributes: new { @class = "control-label col-md-2" })*@
+    <label class="control-label col-md-2">Mã lịch sử</label>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.MaLichSu, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.MaLichSu, "", new { @class = "text-danger" })
+    </div>
+</div>
+<div class="form-group">
+    @*@Html.LabelFor(model => model.LuotVao, htmlAttributes: new { @class = "control-label col-md-2" })*@
+    <label class="control-label col-md-2">Mã lịch sử</label>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.LuotVao, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.LuotVao, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @*@Html.LabelFor(model => model.LuotRa, htmlAttributes: new { @class = "control-label col-md-2" })*@
+    <label class="control-label col-md-2">Mã lịch sử</label>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.LuotRa, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.LuotRa, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @*@Html.LabelFor(model => model.MaTheXeNgay, "MaTheXeNgay", htmlAttributes: new { @class = "control-label col-md-2" })*@
+    <label class="control-label col-md-2">Mã lịch sử</label>
+    <div class="col-md-10">
+        @Html.DropDownList("MaTheXeNgay", null, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.MaTheXeNgay, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @*@Html.LabelFor(model => model.MaTheXeThang, "MaTheXeThang", htmlAttributes: new { @class = "control-label col-md-2" })*@
+    <label class="control-label col-md-2">Mã lịch sử</label>
+    <div class="col-md-10">
+        @Html.DropDownList("MaTheXeThang", null, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.MaTheXeThang, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @*@Html.LabelFor(model => model.MaThanhToan, "MaThanhToan", htmlAttributes: new { @class = "control-label col-md-2" })*@
+    <label class="control-label col-md-2">Mã lịch sử</label>
+    <div class="col-md-10">
+        @Html.DropDownList("MaThanhToan", null, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.MaThanhToan, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Lưu thông tin" class="btn btn-default" style="background: linear-gradient(#A6A9FF,#55ccff); border-color: #55ccff; color:#fff; width: 120px; height: 30px;border-style: unset; border-radius:5px;"/>
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Quay lại", "Index", null, new { style = "text-decoration:none; color: #55ccff;text-align:center;font-size: 14px;" })
+</div>
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@
