@@ -16,6 +16,7 @@
     <!-- boxicons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <!-- bootstrap -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
@@ -28,5 +29,8 @@
     <div class="main">
         @RenderBody()
     </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("script", required: false)
 </body>
 </html>

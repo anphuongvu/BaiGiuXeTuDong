@@ -1,0 +1,194 @@
+﻿@model BaiGiuXeTuDong_KhoaLuanTotNghiep.Models.ThanhToan
+@*@model BaiGiuXeTuDong_KhoaLuanTotNghiep.Models.Xe
+    @using BaiGiuXeTuDong_KhoaLuanTotNghiep.Models*@
+@{
+    ViewBag.Title = "Xác nhận & Thanh toán";
+    Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
+}
+
+
+
+
+<!-- Side bar -->
+<div class="row">
+    <div class="sidebar col-md-3" style="display: flex;">
+
+        <div class="row" style="text-align: center;">
+            <div style="margin: 10px 0;">
+                <img id="imgCapture" src="/assets/img/Logo.png" style="width: 320px; height: 240px; border: groove 1px; display:none;" />
+                <div id="my_camera" style="height: 300px;width: 100%; border: groove 1px;"></div>
+                @*<img src="/assets/img/Logo.png" style="height: 300px;width: 100%; border: groove 1px;" />*@
+                <p style="padding-top: 5px;">Vui lòng đưa mã thẻ giữ xe lên trên camera</p>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="main-container col-md-9">
+        <!-- Image -->
+        <div class="row">
+            <!--<div class="col-sm-5" style="text-align: center;">-->
+            @*<img src="/assets/img/Logo.png" style="height: 300px; width: 100%; border: groove 1px;" />*@
+            <!--<p style="padding-top: 5px;">Kết quả</p>
+            </div>-->
+            @*<div class="col-sm-7" style="text-align: center; margin: 0 auto;">*@
+
+            <div class="col-md-4">
+                <img id="img_bc" style="width: 500px; height: 500px; border: groove 1px;" />
+                <p>Vui lòng quét mã để thanh toán</p>
+            </div>
+            @*</div>*@
+        </div>
+        <hr />
+        <!-- Infomation -->
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-4" style="display: flex;">
+                <label for="" style="margin-right: 10px; color: #55ccff;">Mã vé xe:</label>
+                <p id="vl_mavexe">@Html.DisplayFor(model => model.MaTheXe)</p>
+            </div>
+            <div class="col-sm-4" style="display: flex;">
+                <label for="" style="margin-right: 10px; color: #55ccff;">Biển số xe:</label>
+                <p id="vl_bsx">@Html.DisplayFor(model => model.TheXeNgays.First().Xes.First().BienSo)</p>
+            </div>
+            <div class="col-sm-4" style="display: flex;">
+                <label for="" style="margin-right: 10px; color: #55ccff;">Thời gian:</label>
+                <p id="vl_time">1233132817236821</p>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-sm-4" style="display: flex; align-items: center;">
+                <label for="" style="margin-right: 10px; color: #55ccff;">Loại xe:</label>
+                <select id="inputState" class="form-control" style="width: 150px;">
+                    <option selected>Xe máy</option>
+                    <option>Xe đạp</option>
+                </select>
+                <!-- <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown"
+                        style=" border: none; font-size: 14px;">Xe máy
+                        <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Xe máy</a></li>
+                        <li><a href="#">Xe đạp</a></li>
+                    </ul>
+                </div> -->
+            </div>
+            <div class="col-sm-4" style="display: flex; align-items: center;">
+                <label for="" style="margin-right: 10px; color: #55ccff;">Loại vé:</label>
+                <select id="inputState" class="form-control" style="width: 150px;">
+                    <option selected>Vé lượt</option>
+                    <option>Vé tháng</option>
+                </select>
+                <!-- <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown"
+                        style=" border: none; font-size: 14px;">Vé lượt
+                        <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Vé lượt</a></li>
+                        <li><a href="#">Vé tháng</a></li>
+                    </ul>
+                </div> -->
+            </div>
+            <div class="col-sm-4" style="display: flex;">
+                <label for="" style="margin-right: 10px; color: #55ccff;"></label>
+                <p>1233132817236821</p>
+            </div>
+        </div>
+        <div class="row" style="padding-left:10px; display: flex; align-items: center; text-align: center;">
+            @*<div style="width:90px; height: 30px; background: linear-gradient(#a6a9ff, #55ccff) ;  text-align:center; border-radius:5px; margin:20px 0; font-size: 14px; padding-top: 5px;">*@
+            <div>
+
+                <!-- @Html.ActionLink("Thêm mới", "Create", null, new { style = "text-decoration:none; color: #fff;text-align:center;" }) -->
+                @*<a href="" onclick="lay_the()" style="text-decoration: none; color: #fff; font-size: 14px;"></a>*@
+                <button class="btn btn-info" onclick="start_webcam()"> Bắt đầu thanh toán</button>
+
+                <button class="btn btn-info" onclick="kiem_tra_thanh_toan()"> Kiểm tra thanh toán</button>
+            </div>
+            <div class="checkBox">
+                <i id="check_bx" class='bx bx-check-circle'></i>
+                <p id="trang_thai" style="margin-top: 10px;"></p>
+            </div>
+        </div>
+    </div>
+</div>
+@section script{
+    <script src="~/Scripts/webcam.js"></script>
+    <script language="Javascript">
+        Webcam.set({
+            width: 320,
+            height: 240,
+            image_format: 'jpeg',
+            jpeg_quality: 90
+        })
+        Webcam.attach('my_camera');
+
+        var intervalID = 0;
+        function iter_webcam() {
+            Webcam.snap(function (data_uri) {
+                $("#imgCapture")[0].src = data_uri;
+
+                //document.getElementById("results").innerHTML = '<img src="' + data_uri + '"/>';
+            });
+
+
+            let formData = {
+
+                image_str: $("#imgCapture")[0].src.substring(23, $("#imgCapture")[0].src.length),
+                ma_the: @Model.MaTheXe
+            }
+
+            $.ajax({
+                url: "/Xes/ReadQRCode",
+                type: "POST",
+                data: formData,
+                success: function (response) {
+
+                    if (response.length > 0) {
+                        console.log(response);
+                        $("#img_bc")[0].src = response;
+                    }
+                    console.log(response);
+                },
+                error: function (request, status, error) {
+                    console.log(response);
+                }
+            });
+
+        }
+
+        function start_webcam() {
+
+            return setInterval(iter_webcam, 1000);
+        };
+
+        function thanh_toan() {
+            clearInterval(intervalID);
+            //window.location.href = "ThanhToan/" + $("#ma").text();
+        };
+
+        // todo: mathe xe
+        function kiem_tra_thanh_toan() {
+            let formData = {
+                maTheXe: @Model.MaTheXe
+            }
+            $.ajax({
+                url: "/Xes/kiemTraThangThai",
+                type: "POST",
+                data: formData,
+                success: function (response) {
+                    //console.log(ret_lp);
+                    if (response == "1") {
+                        $("#trang_thai").text("Đã thanh toán");
+                    }
+                    else {
+                        $("#trang_thai").text("Chưa thanh toán");
+                    }
+
+                },
+                error: function (request, status, error) {
+                    //console.log(request.responseText);
+                }
+            });
+        }
+
+    </script>
+}

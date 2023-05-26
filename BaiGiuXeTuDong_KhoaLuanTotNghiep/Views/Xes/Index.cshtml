@@ -1,19 +1,37 @@
 ﻿@model IEnumerable<BaiGiuXeTuDong_KhoaLuanTotNghiep.Models.Xe>
 @*@model BaiGiuXeTuDong_KhoaLuanTotNghiep.Models.Xe
-@using BaiGiuXeTuDong_KhoaLuanTotNghiep.Models*@
+    @using BaiGiuXeTuDong_KhoaLuanTotNghiep.Models*@
 @{
-    ViewBag.Title = "THÔNG TIN XE RA";
+    ViewBag.Title = "THÔNG TIN XE VÀO";
     Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
 }
+
+@*<div class="row">
+    <div class="col-5">
+        
+        <img id="imgCapture" />
+    </div>
+    <div class="col-lg-5">
+        <div id="results"></div>
+    </div>
+    <div class="col-lg-2">
+        <button class="btn" onclick="take_picture()">Take picture</button>
+    </div>
+</div>*@
 
 
 
 <!-- Side bar -->
 <div class="row">
-    <div class="sidebar col-lg-3" style="display: flex;">
-        <div style="text-align: center;">
+    <button class="btn" onclick="take_picture()">Bắt đầu</button>
+</div>
+<div class="row">
+    <div class="sidebar col-md-3" style="display: flex;">
+        
+        <div class="row" style="text-align: center;">
             <div style="margin: 10px 0;">
-                <img src="/assets/img/Logo.png" style="height: 300px;width: 100%; border: groove 1px;" />
+                <div id="my_camera" style="height: 300px;width: 100%; border: groove 1px;">123</div>
+                @*<img src="/assets/img/Logo.png" style="height: 300px;width: 100%; border: groove 1px;" />*@
                 <p style="padding-top: 5px;">Camera bãi giữ xe</p>
             </div>
             <div class="row" style="display: flex;">
@@ -21,38 +39,46 @@
                 <p>15</p>
             </div>
         </div>
+
     </div>
-    <div class="main-container col-lg-9">
+    <div class="main-container col-md-9">
         <!-- Image -->
-        <div class="image" style="display: flex;">
-            <div class="col-sm-5" style="text-align: center;">
-                <img src="/assets/img/Logo.png" style="height: 300px; width: 100%; border: groove 1px;" />
-                <p style="padding-top: 5px;">Camera toàn cảnh</p>
+        <div class="row">
+            <!--<div class="col-sm-5" style="text-align: center;">-->
+            @*<img src="/assets/img/Logo.png" style="height: 300px; width: 100%; border: groove 1px;" />*@
+            <!--<p style="padding-top: 5px;">Kết quả</p>
+    </div>-->
+            @*<div class="col-sm-7" style="text-align: center; margin: 0 auto;">*@
+            <div class="col-md-4" style="margin: 10px 0;">
+                <img id="imgCapture" src="/assets/img/Logo.png" style="width: 320px; height: 240px; border: groove 1px; display:none;" />
+                <img id="imgCapture_hienthi" src="/assets/img/Logo.png" style="width: 320px; height: 240px; border: groove 1px" />
+                @*<img src="/assets/img/Logo.png" style="height: 180px; width: 100%; border: groove 1px;" />*@
+                <p style="padding-top: 5px;">Camera biển số xe</p>
             </div>
-            <div class="col-sm-7" style="text-align: center; margin: 0 auto;">
-                <div style="margin: 10px 0;">
-                    <img src="/assets/img/Logo.png" style="height: 180px; width: 100%; border: groove 1px;" />
-                    <p style="padding-top: 5px;">Camera biển số xe</p>
-                </div>
-                <div>
-                    <img src="/assets/img/Logo.png" style="height: 180px; width: 100%; border: groove 1px;" />
-                    <p style="padding-top: 5px;">Ảnh chụp biển số xe</p>
-                </div>
+            <div class="col-md-4">
+                <img id="img_bsx" src="/assets/img/Logo.png" style="width: 320px; height: 240px; border: groove 1px;" />
+                @*<img src="/assets/img/Logo.png" style="height: 180px; width: 100%; border: groove 1px;" />*@
+                <p style="padding-top: 5px;">Ảnh chụp biển số xe</p>
             </div>
+            <div class="col-md-4">
+                <img id="img_bc" style="width: 500px; height: 500px; border: groove 1px; " />
+            </div>
+            @*</div>*@
         </div>
+        <hr />
         <!-- Infomation -->
         <div class="row" style="margin-top: 20px;">
             <div class="col-sm-4" style="display: flex;">
                 <label for="" style="margin-right: 10px; color: #55ccff;">Mã vé xe:</label>
-                <p>1233132817236821</p>
+                <p id="vl_mavexe">1233132817236821</p>
             </div>
             <div class="col-sm-4" style="display: flex;">
                 <label for="" style="margin-right: 10px; color: #55ccff;">Biển số xe:</label>
-                <p>1233132817236821</p>
+                <p id="vl_bsx">1233132817236821</p>
             </div>
             <div class="col-sm-4" style="display: flex;">
                 <label for="" style="margin-right: 10px; color: #55ccff;">Thời gian:</label>
-                <p>1233132817236821</p>
+                <p id="vl_time">1233132817236821</p>
             </div>
         </div>
         <div class="row" style="margin-top: 10px;">
@@ -89,19 +115,112 @@
                 </div> -->
             </div>
             <div class="col-sm-4" style="display: flex;">
-                <label for="" style="margin-right: 10px; color: #55ccff;">Bãi xe:</label>
+                <label for="" style="margin-right: 10px; color: #55ccff;"></label>
                 <p>1233132817236821</p>
             </div>
         </div>
         <div class="row" style="padding-left:10px; display: flex; align-items: center; text-align: center;">
-            <div style="width:90px; height: 30px; background: linear-gradient(#a6a9ff, #55ccff) ;  text-align:center; border-radius:5px; margin:20px 0; font-size: 14px; padding-top: 5px;">
+            @*<div style="width:90px; height: 30px; background: linear-gradient(#a6a9ff, #55ccff) ;  text-align:center; border-radius:5px; margin:20px 0; font-size: 14px; padding-top: 5px;">*@
+            <div >
+
                 <!-- @Html.ActionLink("Thêm mới", "Create", null, new { style = "text-decoration:none; color: #fff;text-align:center;" }) -->
-                <a href="" style="text-decoration: none; color: #fff; font-size: 14px;">Lấy thẻ xe</a>
+                @*<a href="" onclick="lay_the()" style="text-decoration: none; color: #fff; font-size: 14px;"></a>*@
+                    <button class="btn btn-info" onclick="lay_the()"> Lấy thẻ</button>
+                </div>
+                <div class="checkBox">
+                    <i id="check_bx" class='bx bx-check-circle'></i>
+                    <p style="margin-top: 10px;">Thành công</p>
+                </div>
             </div>
-            <div class="checkBox">
-                <i class='bx bx-check-circle'></i>
-                <p style="margin-top: 10px;">Thành công</p>
-            </div>
-        </div>
     </div>
 </div>
+@section script{
+    <script src="~/Scripts/webcam.js"></script>
+    <script language="Javascript">
+        
+
+        function iter_webcam() {
+            Webcam.snap(function (data_uri) {
+                $("#imgCapture")[0].src = data_uri;
+                
+                //document.getElementById("results").innerHTML = '<img src="' + data_uri + '"/>';
+            });
+
+
+            let formData = {
+
+                image_str: $("#imgCapture")[0].src.substring(23, $("#imgCapture")[0].src.length)
+            }
+
+            $.ajax({
+                url: "/Xes/RecognizeBSX",
+                type: "POST",
+                data: formData,
+                success: function (response) {
+                    let ret_lp = (JSON.parse(response));
+                    
+                    // get time
+                    var date = new Date(parseInt(ret_lp.pattern_id) * 1000);
+                    var hours = date.getHours();
+                    // Minutes part from the timestamp
+                    var minutes = "0" + date.getMinutes();
+                    // Seconds part from the timestamp
+                    var seconds = "0" + date.getSeconds();
+                    var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+
+                    //console.log(ret_lp);
+                    if (ret_lp.result.length > 0) {
+                        $("#imgCapture_hienthi")[0].src = $("#imgCapture")[0].src ;
+                        $("#img_bsx")[0].src = "data:image/png;base64, " + ret_lp.pattern_img;
+                        $("#vl_mavexe").text(ret_lp.maTheXe);
+                        $("#vl_bsx").text(ret_lp.result);
+                        $("#vl_time").text(formattedTime);
+                    }
+                    else {
+                        //$("#vl_bsx").text("----");
+                        //$("#vl_mavexe").text("----");
+                        $("#vl_time").text(formattedTime);
+                    }
+                    
+                },
+                error: function (request, status, error) {
+                    //console.log(request.responseText);
+                }
+            });
+
+        }
+
+        
+
+
+        function take_picture()
+        {
+            Webcam.set({
+                width: 320,
+                height: 240,
+                image_format: 'jpeg',
+                jpeg_quality: 90
+            })
+            Webcam.attach('my_camera');
+
+            const intervalID = setInterval(iter_webcam, 2000);
+        };
+
+        function lay_the() {
+            let formData = {
+                qRCode: $("#vl_mavexe").text()
+            }
+            $.ajax({
+                url: "/Xes/CreateQRCode",
+                type: "POST",
+                data: formData,
+                success: function (response) {
+                    $("#img_bc")[0].src = response;
+                },
+                error: function (request, status, error) {
+                    //console.log(request.responseText);
+                }
+            });
+        }
+    </script>
+}
