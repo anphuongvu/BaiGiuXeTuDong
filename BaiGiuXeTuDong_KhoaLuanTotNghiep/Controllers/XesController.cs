@@ -41,7 +41,8 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ThanhToan thanhToan = db.ThanhToans.Find(int.Parse(id));
+            int id_int = int.Parse(id);
+            ThanhToan thanhToan = db.ThanhToans.Where(x => x.MaTheXe == id_int).FirstOrDefault();
             if (thanhToan == null)
             {
                 return HttpNotFound();
