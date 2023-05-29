@@ -179,15 +179,19 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
 
             // kiem tra xe ton tai chua
             var xes = db.Xes.Where(x => x.BienSo == ret.result).ToList();
-            Xe xe;
-            if (xes.Count  == 0 && ret.result.Length > 0 && ret.result.Length == 9)
+            Xe xe = null;
+            if (xes.Count  == 0)
             {
-                // add new xe
-                xe = new Xe();
-                xe.BienSo = ret.result;
-                xe.MaLoaiXe = 1;
-                db.Entry(xe).State = EntityState.Added;
-                db.SaveChanges();
+                if(ret.result.Length > 0 && ret.result.Length == 9)
+                {
+                    // add new xe
+                    xe = new Xe();
+                    xe.BienSo = ret.result;
+                    xe.MaLoaiXe = 1;
+                    db.Entry(xe).State = EntityState.Added;
+                    db.SaveChanges();
+                }
+                
             }
             else
             {
@@ -195,7 +199,7 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
             }    
 
             // xe chua tồn tại và biển số xe hợp lệ
-            if(xe.MaTheXe == null && ret.result.Length == 9)
+            if(xe != null && xe.MaTheXe == null && ret.result.Length == 9)
             {
                 var mtt = db.ThanhToans.Count();
 
@@ -232,10 +236,18 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
                 db.SaveChanges();
             }
 
-            var jsonRet = Json(response.Content.Remove(response.Content.Length - 2, 2) + ", \"maTheXe\": \"" + xe.MaTheXe.ToString() + "\"}");
+            if (xe != null)
+            {
+                var jsonRet = Json(response.Content.Remove(response.Content.Length - 2, 2) + ", \"maTheXe\": \"" + xe.MaTheXe.ToString() + "\"}");
 
-            return jsonRet;
+                return jsonRet;
+            }
+            else
+            {
+                var jsonRet = Json(response.Content.Remove(response.Content.Length - 2, 2) + ", \"maTheXe\": \"\"}");
 
+                return jsonRet;
+            }
         }
 
 
