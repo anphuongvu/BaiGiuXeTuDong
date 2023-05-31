@@ -27,7 +27,7 @@
         </div>
         <ul class="nav-links">
             <li>
-                <a href="@Url.Action("Index", "HomeAdmin")">
+                <a href="@Url.Action("ThongKeXe", "LichSuXes")">
                     <i class='bx bx-grid-alt'></i>
                     <span class="link_name">Trang chủ</span>
                 </a>
@@ -36,19 +36,19 @@
                 </ul>
             </li>
             <!-- <li>
-                <div class="icon-link">
-                    <a href="" class="name">
-                        <i class='bx bx-user-circle'></i>
-                        <span class="link_name">Quản lý nhận xe</span>
-                    </a>
-                    <i class='bx bxs-chevron-down arrow'></i>
-                </div>
-                <ul class="sub-menu">
-                    <li><a href="" class="link_name">Quản lý nhận xe</a></li>
-                </ul>
-            </li> -->
+        <div class="icon-link">
+            <a href="" class="name">
+                <i class='bx bx-user-circle'></i>
+                <span class="link_name">Quản lý nhận xe</span>
+            </a>
+            <i class='bx bxs-chevron-down arrow'></i>
+        </div>
+        <ul class="sub-menu">
+            <li><a href="" class="link_name">Quản lý nhận xe</a></li>
+        </ul>
+    </li> -->
             <li>
-                <a href="@Url.Action("Index", "Xes")">
+                <a href="@Url.Action("NhanXe", "Xes")">
                     <i class='bx bxs-edit'></i>
                     <span class="link_name">Quản lý nhận xe</span>
                 </a>
@@ -57,24 +57,24 @@
                 </ul>
             </li>
             <!-- <li>
-                <div class="icon-link">
-                    <a href="" class="name">
-                        <i class='bx bx-film' ></i>
-                        <span class="link_name">Quản lý trả xe</span>
-                    </a>
-                    <i class='bx bxs-chevron-down arrow'></i>
-                </div>
-                <ul class="sub-menu">
-                    <li><a href="" class="link_name">Quản lý trả xe</a></li>
-                </ul>
-            </li> -->
+        <div class="icon-link">
+            <a href="" class="name">
+                <i class='bx bx-film' ></i>
+                <span class="link_name">Quản lý trả xe</span>
+            </a>
+            <i class='bx bxs-chevron-down arrow'></i>
+        </div>
+        <ul class="sub-menu">
+            <li><a href="" class="link_name">Quản lý trả xe</a></li>
+        </ul>
+    </li> -->
             <li>
                 <a href="@Url.Action("Index", "LichSuXes")">
                     <i class='bx bx-link-external'></i>
                     <span class="link_name">Quản lý trả xe</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a href="" class="link_name">Quản lý trả xe</a></li>
+                    <li><a href="@Url.Action("TraXe", "Xes")" class="link_name">Quản lý trả xe</a></li>
                 </ul>
             </li>
             <li>
@@ -89,8 +89,14 @@
                 </ul>
             </li>
             <li>
+                <a href="@Url.Action("ThongKeXe", "LichSuXes")">
+                    <i class='bx bx-stats'></i>
+                    <span class="link_name">Thống kê xe</span>
+                </a>
+            </li>
+            <li>
                 <div class="icon-link">
-                    <a href="">
+                    <a href="@Url.Action("DoanhThu", "LichSuXes")">
                         <i class='bx bx-money-withdraw'></i>
                         <span class="link_name">Quản lý doanh thu</span>
                     </a>
@@ -141,7 +147,7 @@
         @RenderBody()
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-    <script src="~/Areas/Admin/js/chart.js"></script>
+    
     <script>
         let arrow = document.querySelectorAll(".arrow");
 
@@ -155,8 +161,8 @@
         }
 
         let sidebar = document.querySelector(".sidebar");
-        console.log(sidebar);
     </script>
+    @RenderSection("script", required: false)
 </body>
 </html>
 

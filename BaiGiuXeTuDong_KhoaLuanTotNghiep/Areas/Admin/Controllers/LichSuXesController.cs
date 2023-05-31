@@ -23,6 +23,42 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Areas.Admin.Controllers
             return View(lichSuXes.ToList().ToPagedList(p ?? 1, 3));
         }
 
+        // GET: Admin/LichSuXes/DoanhThu
+        public ActionResult DoanhThu()
+        {
+            var listItems = db.LichSuXes.Where(x => x.LuotVao != null && x.LuotRa != null && x.LuotVao != "" && x.LuotRa != "").Include(l => l.ThanhToan).Include(l => l.TheXeNgay).Include(l => l.TheXeThang).ToList();
+
+            var thongKeTien = listItems.GroupBy(x => DateTimeOffset.FromUnixTimeSeconds(int.Parse(x.LuotVao)).ToString("yyyy/MM")).Select(g => new ThongKe
+            {
+                index = DateTimeOffset.FromUnixTimeSeconds(int.Parse(g.FirstOrDefault().LuotVao)).ToString("yyyy/MM"),
+                value = (decimal)g.Sum(s => s.TheXeNgay.ViTriDauXe.DonGia)
+            });
+
+            ViewBag.ttn = db.LichSuXes.Where(x => x.MaTheXeNgay != null).Count();
+            ViewBag.ttt = db.LichSuXes.Where(x => x.MaTheXeThang != null).Count();
+
+            return View(thongKeTien.ToList());
+        }
+
+        // GET: Admin/LichSuXes/ThongKeXe
+        public ActionResult ThongKeXe()
+        {
+            var listItems = db.LichSuXes.Where(x => x.LuotVao != null && x.LuotRa != null && x.LuotVao != "" && x.LuotRa != "").Include(l => l.ThanhToan).Include(l => l.TheXeNgay).Include(l => l.TheXeThang).ToList();
+
+            var thongKeTien = listItems.GroupBy(x => DateTimeOffset.FromUnixTimeSeconds(int.Parse(x.LuotVao)).ToString("yyyy/MM")).Select(g => new ThongKe
+            {
+                index = DateTimeOffset.FromUnixTimeSeconds(int.Parse(g.FirstOrDefault().LuotVao)).ToString("yyyy/MM"),
+                value = (decimal)g.Count()
+            });
+
+            ViewBag.xdg = db.LichSuXes.Where(x => (x.MaTheXeNgay != null && x.LuotRa == "") || (x.MaTheXeThang != null && x.LuotRa == "")).Count();
+            ViewBag.kvt = db.ViTriDauXes.Where(x => x.TrangThai == false).Count();
+
+            return View(thongKeTien.ToList());
+        }
+
+
+
         // GET: Admin/LichSuXes/Details/5
         public ActionResult Details(int? id)
         {

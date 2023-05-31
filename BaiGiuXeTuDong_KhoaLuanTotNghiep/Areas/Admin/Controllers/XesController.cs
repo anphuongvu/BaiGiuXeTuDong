@@ -24,6 +24,20 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Areas.Admin.Controllers
             return View(xes.ToList().ToPagedList(p ?? 1,3));
         }
 
+        // GET: Admin/Xes/NhanXe 
+        public ActionResult NhanXe(int? p)
+        {
+            var xes = db.Xes.Where(x => x.MaTheXe == null).Include(x => x.LoaiXe).Include(x => x.TheXeNgay);
+            return View(xes.ToList().ToPagedList(p ?? 1, 3));
+        }
+
+        // GET: Admin/Xes/TraXe
+        public ActionResult TraXe(int? p)
+        {
+            var xes = db.Xes.Where(x => x.MaTheXe == null).Include(x => x.LoaiXe).Include(x => x.TheXeNgay);
+            return View(xes.ToList().ToPagedList(p ?? 1, 3));
+        }
+
         // GET: Admin/Xes/Details/5
         public ActionResult Details(string id)
         {

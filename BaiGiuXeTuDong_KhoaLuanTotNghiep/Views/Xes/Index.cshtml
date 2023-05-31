@@ -6,20 +6,6 @@
     Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
 }
 
-@*<div class="row">
-    <div class="col-5">
-        
-        <img id="imgCapture" />
-    </div>
-    <div class="col-lg-5">
-        <div id="results"></div>
-    </div>
-    <div class="col-lg-2">
-        <button class="btn" onclick="take_picture()">Take picture</button>
-    </div>
-</div>*@
-
-
 
 <!-- Side bar -->
 <div class="row">
@@ -36,34 +22,25 @@
             </div>
             <div class="row" style="display: flex;">
                 <label for="" style="margin-left: 10px;margin-right: 10px; color: #55ccff;">Số vị trí còn trống:</label>
-                <p>15</p>
+                <p>@ViewBag.soChoTrong</p>
             </div>
         </div>
 
     </div>
     <div class="main-container col-md-9">
-        <!-- Image -->
         <div class="row">
-            <!--<div class="col-sm-5" style="text-align: center;">-->
-            @*<img src="/assets/img/Logo.png" style="height: 300px; width: 100%; border: groove 1px;" />*@
-            <!--<p style="padding-top: 5px;">Kết quả</p>
-    </div>-->
-            @*<div class="col-sm-7" style="text-align: center; margin: 0 auto;">*@
             <div class="col-md-4" style="margin: 10px 0;">
                 <img id="imgCapture" src="/assets/img/Logo.png" style="width: 320px; height: 240px; border: groove 1px; display:none;" />
                 <img id="imgCapture_hienthi" src="/assets/img/Logo.png" style="width: 320px; height: 240px; border: groove 1px" />
-                @*<img src="/assets/img/Logo.png" style="height: 180px; width: 100%; border: groove 1px;" />*@
                 <p style="padding-top: 5px;">Camera biển số xe</p>
             </div>
             <div class="col-md-4">
                 <img id="img_bsx" src="/assets/img/Logo.png" style="width: 320px; height: 240px; border: groove 1px;" />
-                @*<img src="/assets/img/Logo.png" style="height: 180px; width: 100%; border: groove 1px;" />*@
                 <p style="padding-top: 5px;">Ảnh chụp biển số xe</p>
             </div>
             <div class="col-md-4">
                 <img id="img_bc" style="width: 500px; height: 500px; border: groove 1px; " />
             </div>
-            @*</div>*@
         </div>
         <hr />
         <!-- Infomation -->
@@ -88,15 +65,6 @@
                     <option selected>Xe máy</option>
                     <option>Xe đạp</option>
                 </select>
-                <!-- <div class="dropdown">
-                    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown"
-                        style=" border: none; font-size: 14px;">Xe máy
-                        <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Xe máy</a></li>
-                        <li><a href="#">Xe đạp</a></li>
-                    </ul>
-                </div> -->
             </div>
             <div class="col-sm-4" style="display: flex; align-items: center;">
                 <label for="" style="margin-right: 10px; color: #55ccff;">Loại vé:</label>
@@ -104,15 +72,6 @@
                     <option selected>Vé lượt</option>
                     <option>Vé tháng</option>
                 </select>
-                <!-- <div class="dropdown">
-                    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown"
-                        style=" border: none; font-size: 14px;">Vé lượt
-                        <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Vé lượt</a></li>
-                        <li><a href="#">Vé tháng</a></li>
-                    </ul>
-                </div> -->
             </div>
             <div class="col-sm-4" style="display: flex;">
                 <label for="" style="margin-right: 10px; color: #55ccff;"></label>
@@ -120,18 +79,14 @@
             </div>
         </div>
         <div class="row" style="padding-left:10px; display: flex; align-items: center; text-align: center;">
-            @*<div style="width:90px; height: 30px; background: linear-gradient(#a6a9ff, #55ccff) ;  text-align:center; border-radius:5px; margin:20px 0; font-size: 14px; padding-top: 5px;">*@
             <div >
-
-                <!-- @Html.ActionLink("Thêm mới", "Create", null, new { style = "text-decoration:none; color: #fff;text-align:center;" }) -->
-                @*<a href="" onclick="lay_the()" style="text-decoration: none; color: #fff; font-size: 14px;"></a>*@
-                    <button class="btn btn-info" onclick="lay_the()"> Lấy thẻ</button>
-                </div>
-                <div class="checkBox">
-                    <i id="check_bx" class='bx bx-check-circle'></i>
-                    <p style="margin-top: 10px;">Thành công</p>
-                </div>
+                <button class="btn btn-info" onclick="lay_the()"> Lấy thẻ</button>
             </div>
+            <div class="checkBox">
+                <i id="check_bx" class='bx bx-check-circle'></i>
+                <p style="margin-top: 10px;">Thành công</p>
+            </div>
+        </div>
     </div>
 </div>
 @section script{
@@ -208,7 +163,8 @@
 
         function lay_the() {
             let formData = {
-                qRCode: $("#vl_mavexe").text()
+                qRCode: $("#vl_mavexe").text(),
+                bsx: $("#vl_bsx").text()
             }
             $.ajax({
                 url: "/Xes/CreateQRCode",

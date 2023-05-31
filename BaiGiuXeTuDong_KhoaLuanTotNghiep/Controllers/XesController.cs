@@ -26,12 +26,14 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
         public ActionResult Index()
         {
             var xes = db.Xes.Include(x => x.LoaiXe).Include(x => x.TheXeNgay);
+            ViewBag.soChoTrong = db.ViTriDauXes.Where(x => x.TrangThai == false).Count();
             return View(xes.ToList());
         }
 
         // GET: Xes
         public ActionResult XeRa()
         {
+            ViewBag.soChoTrong = db.ViTriDauXes.Where(x => x.TrangThai == false).Count();
             return View();
         }
 
@@ -198,47 +200,13 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
                 xe = xes[0];
             }    
 
-            // xe chua tồn tại và biển số xe hợp lệ
-            if(xe != null && xe.MaTheXe == null && ret.result.Length == 9)
-            {
-                var mtt = db.ThanhToans.Count();
-
-                // the xe
-                var theXeNgay = db.TheXeNgays.Where(x => x.TrangThai == false).First();
-                theXeNgay.GioVao = DateTime.Now;
-                theXeNgay.TrangThai = true;
-                theXeNgay.MaThanhToan = mtt;
-                db.Entry(theXeNgay).State = EntityState.Modified;
-
-                // Thanh Toan
-
-                ThanhToan thanhToan = new ThanhToan();
-                thanhToan.MaThanhToan = mtt;
-                thanhToan.MaTheXe = theXeNgay.MaTheXeNgay;
-                thanhToan.TrangThai = false;
-                thanhToan.MaLoaiThanhToan = 2; // barcode
-                db.Entry(thanhToan).State = EntityState.Added;
-
-                LichSuXe lichSuXe = new LichSuXe();
-                lichSuXe.MaLichSu = thanhToan.MaThanhToan;
-                lichSuXe.LuotVao = "1";
-                lichSuXe.LuotRa = "0";
-                lichSuXe.MaTheXeNgay = theXeNgay.MaTheXeNgay;
-                lichSuXe.MaThanhToan = thanhToan.MaThanhToan;
-
-                db.Entry(lichSuXe).State = EntityState.Added;
-
-                // thong tin xe
-                xe.MaTheXe = theXeNgay.MaTheXeNgay;
-                db.Entry(xe).State = EntityState.Modified;
-
-                // save to db
-                db.SaveChanges();
-            }
 
             if (xe != null)
             {
-                var jsonRet = Json(response.Content.Remove(response.Content.Length - 2, 2) + ", \"maTheXe\": \"" + xe.MaTheXe.ToString() + "\"}");
+                // TODO: Check the xe thang
+                // the xe
+                var theXeNgay = db.TheXeNgays.Where(x => x.TrangThai == false).First();
+                var jsonRet = Json(response.Content.Remove(response.Content.Length - 2, 2) + ", \"maTheXe\": \"" + theXeNgay.MaTheXeNgay.ToString() + "\"}");
 
                 return jsonRet;
             }
@@ -285,15 +253,61 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
         }
 
         [HttpPost]
-        public JsonResult CreateQRCode(string qRCode)
+        public JsonResult CreateQRCode(string qRCode, string bsx)
         {
-            QRCodeGenerator QrGenerator = new QRCodeGenerator();
-            QRCodeData QrCodeInfo = QrGenerator.CreateQrCode(qRCode, QRCodeGenerator.ECCLevel.Q);
-            QRCode QrCode = new QRCode(QrCodeInfo);
-            Bitmap QrBitmap = QrCode.GetGraphic(60);
-            byte[] BitmapArray = QrBitmap.BitmapToByteArray();
-            string QrUri = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(BitmapArray));
-            return Json(QrUri);
+            Xe xe = db.Xes.Where(x => x.BienSo == bsx).FirstOrDefault();
+
+            if (xe != null)
+            {
+                var mtt = db.ThanhToans.Count();
+                // The xe
+                var theXeNgay = db.TheXeNgays.Find(int.Parse(qRCode));
+                theXeNgay.GioVao = DateTime.Now;
+                theXeNgay.TrangThai = true;
+                theXeNgay.MaThanhToan = mtt;
+                db.Entry(theXeNgay).State = EntityState.Modified;
+
+                // Thanh Toan
+                ThanhToan thanhToan = new ThanhToan();
+                thanhToan.MaThanhToan = mtt;
+                thanhToan.MaTheXe = theXeNgay.MaTheXeNgay;
+                thanhToan.TrangThai = false;
+                thanhToan.MaLoaiThanhToan = 2; // barcode
+                db.Entry(thanhToan).State = EntityState.Added;
+
+                // lich su
+                LichSuXe lichSuXe = new LichSuXe();
+                lichSuXe.MaLichSu = thanhToan.MaThanhToan;
+                // Get the offset from current time in UTC time
+                DateTimeOffset dto = new DateTimeOffset(DateTime.Now);
+                lichSuXe.LuotVao = dto.ToUnixTimeSeconds().ToString();
+                lichSuXe.LuotRa = "";
+                lichSuXe.MaTheXeNgay = theXeNgay.MaTheXeNgay;
+                lichSuXe.MaThanhToan = thanhToan.MaThanhToan;
+                db.Entry(lichSuXe).State = EntityState.Added;
+
+                //vi tri
+                theXeNgay.ViTriDauXe.TrangThai = true;
+                db.Entry(theXeNgay.ViTriDauXe).State = EntityState.Modified;
+
+                // thong tin xe
+                xe.MaTheXe = theXeNgay.MaTheXeNgay;
+                db.Entry(xe).State = EntityState.Modified;
+
+                // save to db
+                db.SaveChanges();
+
+                QRCodeGenerator QrGenerator = new QRCodeGenerator();
+                QRCodeData QrCodeInfo = QrGenerator.CreateQrCode(qRCode, QRCodeGenerator.ECCLevel.Q);
+                QRCode QrCode = new QRCode(QrCodeInfo);
+                Bitmap QrBitmap = QrCode.GetGraphic(60);
+                byte[] BitmapArray = QrBitmap.BitmapToByteArray();
+                string QrUri = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(BitmapArray));
+                return Json(QrUri);
+            }
+
+
+            return Json("");
         }
 
         [HttpPost]
@@ -344,11 +358,6 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
                 }
             }    
                 
-            //}
-            //catch (Exception ex)
-            //{
-            //    return Json("");
-            //}
 
             return Json("");
         }

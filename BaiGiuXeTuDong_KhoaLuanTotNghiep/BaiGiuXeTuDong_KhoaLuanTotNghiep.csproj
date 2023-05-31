@@ -223,6 +223,7 @@
     <Compile Include="Models\LoaiXe.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ThongKe.cs" />
     <Compile Include="Models\LPRecognitionResult.cs" />
     <Compile Include="Models\QRCodeModel .cs" />
     <Compile Include="Models\ThanhToan.cs">
@@ -321,6 +322,10 @@
     <Content Include="Areas\Admin\Views\LichSuXes\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Search\SearchTraXe.cshtml" />
     <Content Include="Scripts\bower.json" />
+    <Content Include="Areas\Admin\Views\Xes\NhanXe.cshtml" />
+    <Content Include="Areas\Admin\Views\Xes\TraXe.cshtml" />
+    <Content Include="Areas\Admin\Views\LichSuXes\DoanhThu.cshtml" />
+    <Content Include="Areas\Admin\Views\LichSuXes\ThongKeXe.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -374,7 +379,6 @@
     <Content Include="Scripts\src\JPGEncoder.as" />
     <Content Include="Scripts\src\jscam.as" />
     <Content Include="Scripts\webcam.jquery.json" />
-    <Content Include="Views\Xes\CreateQRCode.cshtml" />
     <Content Include="Views\Xes\XeRa.cshtml" />
     <Content Include="Views\Xes\ThanhToan.cshtml" />
     <Content Include="Views\ThanhToans\Details.cshtml" />

@@ -6,22 +6,6 @@
     Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
 }
 
-@*<div class="row">
-        <div class="col-5">
-
-            <img id="imgCapture" />
-        </div>
-        <div class="col-lg-5">
-            <div id="results"></div>
-        </div>
-        <div class="col-lg-2">
-            <button class="btn" onclick="take_picture()">Take picture</button>
-        </div>
-    </div>*@
-
-
-
-<!-- Side bar -->
 <div class="row">
     <button class="btn" onclick="take_picture()">Bắt đầu</button>
 </div>
@@ -30,14 +14,14 @@
 
         <div class="row" style="text-align: center;">
             <div style="margin: 10px 0;">
-                <div id="my_camera" style="height: 300px;width: 100%; border: groove 1px;"></div>
+                <div id="my_camera" style="width: 320px; height: 240px; border: groove 1px;"></div>
                 <p id="ma" style="display: none;">0</p>
                 @*<img src="/assets/img/Logo.png" style="height: 300px;width: 100%; border: groove 1px;" />*@
                 <p style="padding-top: 5px;">Camera bãi giữ xe</p>
             </div>
             <div class="row" style="display: flex;">
                 <label for="" style="margin-left: 10px;margin-right: 10px; color: #55ccff;">Số vị trí còn trống:</label>
-                <p>15</p>
+                <p>@ViewBag.soChoTrong</p>
             </div>
         </div>
 
@@ -117,7 +101,6 @@
             </div>
             <div class="col-sm-4" style="display: flex;">
                 <label for="" style="margin-right: 10px; color: #55ccff;"></label>
-                <p>1233132817236821</p>
             </div>
         </div>
         <div class="row" style="padding-left:10px; display: flex; align-items: center; text-align: center;">
@@ -143,18 +126,15 @@
         function iter_webcam() {
             Webcam.snap(function (data_uri) {
                 $("#imgCapture")[0].src = data_uri;
-
-                //document.getElementById("results").innerHTML = '<img src="' + data_uri + '"/>';
             });
 
 
             let formData = {
-
                 image_str: $("#imgCapture")[0].src.substring(23, $("#imgCapture")[0].src.length)
             }
 
             $.ajax({
-                url: "/Xes/RecognizeBSX",
+                url: "/Xes/RecognizeBSXXeRa",
                 type: "POST",
                 data: formData,
                 success: function (response) {

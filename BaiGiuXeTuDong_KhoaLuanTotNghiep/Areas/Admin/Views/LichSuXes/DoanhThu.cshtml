@@ -1,0 +1,75 @@
+﻿@model IEnumerable<BaiGiuXeTuDong_KhoaLuanTotNghiep.Models.ThongKe>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@*<h2>Index</h2>*@
+
+<!-- main -->
+@*<div class="main">*@
+<h3 style="font-weight: 500; color: #A6A9FF; text-align: center; font-size: 30px;">QUẢN LÝ BÃI GIỮ XE</h3>
+<!--cards-->
+<div class="cardBox">
+    <div class="card">
+        <div>
+            <div class="numbers">@ViewBag.ttn</div>
+            <div class="cardName">Lượt thanh toán ngày</div>
+        </div>
+        <div class="iconBx">
+            <ion-icon name="eye-outline"></ion-icon>
+        </div>
+    </div>
+    <div class="card">
+        <div>
+            <div class="numbers">@ViewBag.ttt</div>
+            <div class="cardName">Lượt thanh toán tháng</div>
+        </div>
+        <div class="iconBx">
+            <ion-icon name="create-outline"></ion-icon>
+        </div>
+    </div>
+</div>
+<!-- chart -->
+<div class="charts">
+    <div class="chart col-12">
+        <h2 style="font-weight: 500; color: #A6A9FF; font-size: 30px;">Biểu đồ thống kê doanh thu theo tháng</h2>
+        <canvas id="doanhThuChart" style="width: 100%; height: 450px; margin-right: 20px"></canvas>
+    </div>
+</div>
+
+@section script{
+    <script>
+
+        const ctx = document.getElementById('doanhThuChart').getContext('2d');
+        var labelList = [];
+        var dataList = [];
+        @foreach (var d in Model){
+            @:labelList.push("@d.index");
+            @:dataList.push(@d.value);
+        };
+        console.log(dataList);
+
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labelList,
+                datasets: [{
+                    label: 'Tổng số tiền',
+                    data: dataList,
+                    backgroundColor: [
+                        'rgb(166, 169, 255)'
+                    ],
+                    borderColor: [
+                        'rgb(84, 204, 255)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+    </script>
+}
