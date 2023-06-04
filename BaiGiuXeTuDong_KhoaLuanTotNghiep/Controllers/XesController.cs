@@ -15,6 +15,7 @@ using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using ZXing;
+using System.IO.Ports;
 
 namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
 {
@@ -205,10 +206,19 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
             {
                 // TODO: Check the xe thang
                 // the xe
-                var theXeNgay = db.TheXeNgays.Where(x => x.TrangThai == false).First();
-                var jsonRet = Json(response.Content.Remove(response.Content.Length - 2, 2) + ", \"maTheXe\": \"" + theXeNgay.MaTheXeNgay.ToString() + "\"}");
-
-                return jsonRet;
+                
+                if (xe.MaTheXe > 1000)
+                {
+                    var jsonRet = Json(response.Content.Remove(response.Content.Length - 2, 2) + ", \"maTheXe\": \"" + xe.MaTheXe.ToString() + "\"}");
+                    return jsonRet;
+                }    
+                else
+                {
+                    var theXeNgay = db.TheXeNgays.Where(x => x.TrangThai == false).First();
+                    var jsonRet = Json(response.Content.Remove(response.Content.Length - 2, 2) + ", \"maTheXe\": \"" + theXeNgay.MaTheXeNgay.ToString() + "\"}");
+                    return jsonRet;
+                }    
+                
             }
             else
             {
@@ -255,6 +265,7 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
         [HttpPost]
         public JsonResult CreateQRCode(string qRCode, string bsx)
         {
+            // Check the xe Thang
             Xe xe = db.Xes.Where(x => x.BienSo == bsx).FirstOrDefault();
 
             if (xe != null)
@@ -272,6 +283,7 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
                 thanhToan.MaThanhToan = mtt;
                 thanhToan.MaTheXe = theXeNgay.MaTheXeNgay;
                 thanhToan.TrangThai = false;
+                thanhToan.SoTien = theXeNgay.ViTriDauXe.DonGia;
                 thanhToan.MaLoaiThanhToan = 2; // barcode
                 db.Entry(thanhToan).State = EntityState.Added;
 
@@ -308,6 +320,48 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
 
 
             return Json("");
+        }
+
+        private static SerialPort myServo;
+        
+        [HttpGet]
+        public JsonResult GatCanXeVao()
+        {
+            myServo = new SerialPort();
+            myServo.BaudRate = 9600;
+            myServo.PortName = "COM3";
+            myServo.Open();
+            if (myServo.IsOpen)
+            {
+                int pin = 0;
+
+                myServo.Write(pin.ToString() + ":0");
+                System.Threading.Thread.Sleep(5000);
+                myServo.Write(pin.ToString() + ":90");
+
+            }
+            myServo.Close();
+            return Json("OK");
+        }
+
+        [HttpGet]
+        public JsonResult GatCanXeRa()
+        {
+            myServo = new SerialPort();
+            myServo.BaudRate = 9600;
+            myServo.PortName = "COM3";
+            myServo.Open();
+            if (myServo.IsOpen)
+            {
+                int pin = 0;
+
+                myServo.Write(pin.ToString() + ":0");
+                System.Threading.Thread.Sleep(5000);
+                myServo.Write(pin.ToString() + ":90");
+
+            }
+            myServo.Close();
+            return Json("OK");
         }
 
         [HttpPost]

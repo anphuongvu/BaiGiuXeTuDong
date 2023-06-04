@@ -26,12 +26,13 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Areas.Admin.Controllers
         // GET: Admin/LichSuXes/DoanhThu
         public ActionResult DoanhThu()
         {
-            var listItems = db.LichSuXes.Where(x => x.LuotVao != null && x.LuotRa != null && x.LuotVao != "" && x.LuotRa != "").Include(l => l.ThanhToan).Include(l => l.TheXeNgay).Include(l => l.TheXeThang).ToList();
+            var listItems = db.LichSuXes.Where(x => x.LuotVao != null && x.LuotRa != null && x.LuotVao != "" ).Include(l => l.ThanhToan).Include(l => l.TheXeNgay).Include(l => l.TheXeThang).ToList();
 
+            // TODO doanh thu theo thẻ th
             var thongKeTien = listItems.GroupBy(x => DateTimeOffset.FromUnixTimeSeconds(int.Parse(x.LuotVao)).ToString("yyyy/MM")).Select(g => new ThongKe
             {
                 index = DateTimeOffset.FromUnixTimeSeconds(int.Parse(g.FirstOrDefault().LuotVao)).ToString("yyyy/MM"),
-                value = (decimal)g.Sum(s => s.TheXeNgay.ViTriDauXe.DonGia)
+                value = (decimal)g.Sum(s => ( s.TheXeNgay != null ? s.TheXeNgay.ThanhToan.SoTien : s.TheXeThang.ThanhToan.SoTien))
             });
 
             ViewBag.ttn = db.LichSuXes.Where(x => x.MaTheXeNgay != null).Count();

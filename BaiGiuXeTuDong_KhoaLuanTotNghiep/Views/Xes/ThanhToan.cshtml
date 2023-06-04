@@ -178,6 +178,18 @@
                     //console.log(ret_lp);
                     if (response == "1") {
                         $("#trang_thai").text("Đã thanh toán");
+
+                        // gat can xe
+                        $.ajax({
+                            url: "/Xes/GatCanXeRa",
+                            type: "Get",
+                            success: function (response) {
+
+                            },
+                            error: function (request, status, error) {
+                                //console.log(request.responseText);
+                            }
+                        });
                     }
                     else {
                         $("#trang_thai").text("Chưa thanh toán");

@@ -162,21 +162,50 @@
         };
 
         function lay_the() {
-            let formData = {
-                qRCode: $("#vl_mavexe").text(),
-                bsx: $("#vl_bsx").text()
+            if (parseInt($("#vl_mavexe").text()) < 1000) {
+                // xe thang duoc di thang
+                $.ajax({
+                    url: "/Xes/GatCanXeVao",
+                    type: "Get",
+                    success: function (response) {
+                        
+                    },
+                    error: function (request, status, error) {
+                        //console.log(request.responseText);
+                    }
+                });
             }
-            $.ajax({
-                url: "/Xes/CreateQRCode",
-                type: "POST",
-                data: formData,
-                success: function (response) {
-                    $("#img_bc")[0].src = response;
-                },
-                error: function (request, status, error) {
-                    //console.log(request.responseText);
+            else {
+                // Xe ngay
+                let formData = {
+                    qRCode: $("#vl_mavexe").text(),
+                    bsx: $("#vl_bsx").text()
                 }
-            });
+                $.ajax({
+                    url: "/Xes/CreateQRCode",
+                    type: "POST",
+                    data: formData,
+                    success: function (response) {
+                        $("#img_bc")[0].src = response;
+
+                        // gat can xe
+                        $.ajax({
+                            url: "/Xes/GatCanXeVao",
+                            type: "Get",
+                            success: function (response) {
+
+                            },
+                            error: function (request, status, error) {
+                                //console.log(request.responseText);
+                            }
+                        });
+                    },
+                    error: function (request, status, error) {
+                        //console.log(request.responseText);
+                    }
+                });
+            }
+            
         }
     </script>
 }
