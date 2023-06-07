@@ -223,6 +223,9 @@
     <Compile Include="Models\LoaiXe.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ThongKe.cs" />
     <Compile Include="Models\LPRecognitionResult.cs" />
     <Compile Include="Models\QRCodeModel .cs" />
