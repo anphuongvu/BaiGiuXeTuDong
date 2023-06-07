@@ -16,6 +16,10 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using ZXing;
 using System.IO.Ports;
+using Emgu.CV;
+using Emgu.CV.Structure;
+using Emgu.Util;
+using Emgu.CV.CvEnum;
 
 namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
 {
@@ -263,7 +267,7 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
         }
 
         [HttpPost]
-        public JsonResult CreateQRCode(string qRCode, string bsx)
+        public JsonResult CreateQRCode(string qRCode, string bsx, string hinhAnhXe)
         {
             // Check the xe Thang
             Xe xe = db.Xes.Where(x => x.BienSo == bsx).FirstOrDefault();
@@ -304,6 +308,24 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
 
                 // thong tin xe
                 xe.MaTheXe = theXeNgay.MaTheXeNgay;
+                
+
+                // b64 string to img
+                Bitmap bmpReturn = null;
+                byte[] byteBuffer = Convert.FromBase64String(hinhAnhXe);
+                MemoryStream memoryStream = new MemoryStream(byteBuffer);
+                memoryStream.Position = 0;
+                bmpReturn = (Bitmap)Bitmap.FromStream(memoryStream);
+                memoryStream.Close();
+                memoryStream = null;
+                byteBuffer = null;
+                Image<Bgr, Byte> ImageFrame = new Image<Bgr, Byte>(bmpReturn);
+                string FilePath = Server.MapPath("~/assets/img/") + bsx + ".jpg";
+                CvInvoke.PutText(ImageFrame, bsx, new Point(20, 20), FontFace.HersheySimplex, 3.0, new Bgr(Color.Red).MCvScalar);
+                ImageFrame.ToBitmap().Save(FilePath, ImageFormat.Jpeg);
+                xe.HinhAnh = FilePath;
+
+
                 db.Entry(xe).State = EntityState.Modified;
 
                 // save to db
