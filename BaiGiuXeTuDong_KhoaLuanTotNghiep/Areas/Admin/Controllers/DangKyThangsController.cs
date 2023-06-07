@@ -21,6 +21,15 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Areas.Admin.Controllers
             return View(dangKyThangs.ToList());
         }
 
+        public ActionResult Status(int id)
+        {
+            DangKyThang dk = db.DangKyThangs.Find(id);
+            dk.TrangThai = (dk.TrangThai == false) ? true : false;
+            db.Entry(dk).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         // GET: Admin/DangKyThangs/Details/5
         public ActionResult Details(int? id)
         {
