@@ -125,8 +125,6 @@
         function iter_webcam() {
             Webcam.snap(function (data_uri) {
                 $("#imgCapture")[0].src = data_uri;
-
-                //document.getElementById("results").innerHTML = '<img src="' + data_uri + '"/>';
             });
 
 
