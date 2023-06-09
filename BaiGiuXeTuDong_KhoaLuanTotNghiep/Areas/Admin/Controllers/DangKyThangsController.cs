@@ -26,6 +26,9 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Areas.Admin.Controllers
             DangKyThang dk = db.DangKyThangs.Find(id);
             dk.TrangThai = (dk.TrangThai == false) ? true : false;
             db.Entry(dk).State = EntityState.Modified;
+            
+            // The xe thang
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }

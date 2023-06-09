@@ -6,9 +6,9 @@
     Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
 }
 
-<div class="row">
+@*<div class="row">
     <button class="btn" onclick="take_picture()">Bắt đầu</button>
-</div>
+</div>*@
 <div class="row">
     <div class="sidebar col-md-3" style="display: flex;">
 
@@ -130,7 +130,7 @@
                     var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 
                     //console.log(ret_lp);
-                    if (ret_lp.result.length > 0) {
+                    if (ret_lp.result.length == 9) {
                         $("#imgCapture_hienthi")[0].src = $("#imgCapture")[0].src;
                         $("#img_bsx_vao")[0].src = "/assets/img/" + ret_lp.result +".jpg";
                         $("#img_bsx")[0].src = "data:image/png;base64, " + ret_lp.pattern_img;
@@ -152,8 +152,6 @@
             });
 
         }
-
-
         function take_picture() {
             Webcam.set({
                 width: 320,
@@ -163,8 +161,13 @@
             })
             Webcam.attach('my_camera');
 
-            intervalID = setInterval(iter_webcam, 2000);
+            setTimeout(function () {
+                const intervalID = setInterval(iter_webcam, 1000);
+            }, 5000);
+
+
         };
+        take_picture();
 
         // TODO lay ma the xe
         function thanh_toan() {

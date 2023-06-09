@@ -249,9 +249,6 @@
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>DB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ThongKe.cs" />
     <Compile Include="Models\LPRecognitionResult.cs" />
     <Compile Include="Models\QRCodeModel .cs" />
@@ -412,6 +409,7 @@
     <Content Include="Views\Xes\XeRa.cshtml" />
     <Content Include="Views\Xes\ThanhToan.cshtml" />
     <Content Include="Views\ThanhToans\Details.cshtml" />
+    <Content Include="Views\DangKyThangs\ChiTiet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

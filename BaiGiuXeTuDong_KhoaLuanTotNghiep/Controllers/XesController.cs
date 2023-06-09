@@ -49,7 +49,15 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             int id_int = int.Parse(id);
-            ThanhToan thanhToan = db.ThanhToans.Where(x => x.MaTheXe == id_int).LastOrDefault();
+            var thanhToanList = db.ThanhToans.Where(x => x.MaTheXe == id_int).ToList();
+
+            if(thanhToanList.Count  <= 0)
+            {
+                return HttpNotFound();
+            }
+            ThanhToan thanhToan = thanhToanList[thanhToanList.Count - 1];
+                
+
             if (thanhToan == null)
             {
                 return HttpNotFound();
@@ -211,7 +219,7 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
                 // TODO: Check the xe thang
                 // the xe
                 
-                if (xe.MaTheXe > 1000)
+                if (xe.MaTheXe != null && xe.MaTheXe > 1000)
                 {
                     var jsonRet = Json(response.Content.Remove(response.Content.Length - 2, 2) + ", \"maTheXe\": \"" + xe.MaTheXe.ToString() + "\"}");
                     return jsonRet;
@@ -272,9 +280,12 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
             // Check the xe Thang
             Xe xe = db.Xes.Where(x => x.BienSo == bsx).FirstOrDefault();
 
-            if (xe != null)
+            // TODO: check the thang
+            if (xe != null )
             {
+                
                 var mtt = db.ThanhToans.Count();
+
                 // The xe
                 var theXeNgay = db.TheXeNgays.Find(int.Parse(qRCode));
                 theXeNgay.GioVao = DateTime.Now;
@@ -308,7 +319,7 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
 
                 // thong tin xe
                 xe.MaTheXe = theXeNgay.MaTheXeNgay;
-                
+
 
                 // b64 string to img
                 Bitmap bmpReturn = null;
@@ -338,7 +349,8 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
                 byte[] BitmapArray = QrBitmap.BitmapToByteArray();
                 string QrUri = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(BitmapArray));
                 return Json(QrUri);
-            }
+                
+            }  
 
 
             return Json("");
@@ -351,15 +363,15 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
         {
             myServo = new SerialPort();
             myServo.BaudRate = 9600;
-            myServo.PortName = "COM3";
+            myServo.PortName = "COM5";
             myServo.Open();
             if (myServo.IsOpen)
             {
                 int pin = 0;
 
-                myServo.Write(pin.ToString() + ":0");
-                System.Threading.Thread.Sleep(5000);
                 myServo.Write(pin.ToString() + ":90");
+                System.Threading.Thread.Sleep(5000);
+                myServo.Write(pin.ToString() + ":0");
 
             }
             myServo.Close();
@@ -371,15 +383,15 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
         {
             myServo = new SerialPort();
             myServo.BaudRate = 9600;
-            myServo.PortName = "COM3";
+            myServo.PortName = "COM5";
             myServo.Open();
             if (myServo.IsOpen)
             {
                 int pin = 0;
 
-                myServo.Write(pin.ToString() + ":0");
-                System.Threading.Thread.Sleep(5000);
                 myServo.Write(pin.ToString() + ":90");
+                System.Threading.Thread.Sleep(5000);
+                myServo.Write(pin.ToString() + ":0");
 
             }
             myServo.Close();
@@ -392,7 +404,37 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
             TheXeNgay theXeNgay = db.TheXeNgays.Find( int.Parse(maTheXe));
             if((bool)theXeNgay.ThanhToan.TrangThai)
             {
-                return Json("1");
+                if (theXeNgay.MaTheXeNgay < 1000)
+                {
+                    return Json("1");
+                }    
+                else
+                {
+                    Xe xe = db.Xes.Where(x => x.MaTheXe == theXeNgay.MaTheXeNgay).FirstOrDefault();
+                    if ( xe == null)
+                    {
+                        return Json("0");
+
+                    }
+                    var dktl = db.DangKyThangs.Where(x => x.BienSoXe == xe.BienSo).ToList();
+                    DangKyThang dkt = dktl[dktl.Count - 1];
+
+                    if (dkt == null)
+                    {
+                        return Json("0");
+
+                    }
+
+                    if ((bool)dkt.TrangThai)
+                    {
+                        return Json("2");
+                    }
+                    else
+                    {
+                        return Json("1");
+                    }    
+                }    
+                
             }
 
             return Json("0");
@@ -425,7 +467,7 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
                     TheXeNgay theXeNgay = db.TheXeNgays.Find(int.Parse(decoded));
 
                     QRCodeGenerator QrGenerator = new QRCodeGenerator();
-                    QRCodeData QrCodeInfo = QrGenerator.CreateQrCode(HttpContext.Request.Url.Authority + "/ThanhToans/Details/" + theXeNgay.MaThanhToan.ToString(), QRCodeGenerator.ECCLevel.Q);
+                    QRCodeData QrCodeInfo = QrGenerator.CreateQrCode("https://" + HttpContext.Request.Url.Authority + "/ThanhToans/Details/" + theXeNgay.MaThanhToan.ToString(), QRCodeGenerator.ECCLevel.Q);
                     QRCode QrCode = new QRCode(QrCodeInfo);
                     Bitmap QrBitmap = QrCode.GetGraphic(60);
                     byte[] BitmapArray = QrBitmap.BitmapToByteArray();

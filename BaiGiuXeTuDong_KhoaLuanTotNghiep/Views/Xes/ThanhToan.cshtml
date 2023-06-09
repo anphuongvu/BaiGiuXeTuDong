@@ -99,7 +99,7 @@
 
                 <!-- @Html.ActionLink("Thêm mới", "Create", null, new { style = "text-decoration:none; color: #fff;text-align:center;" }) -->
                 @*<a href="" onclick="lay_the()" style="text-decoration: none; color: #fff; font-size: 14px;"></a>*@
-                <button class="btn btn-info" onclick="start_webcam()"> Bắt đầu thanh toán</button>
+                @*<button class="btn btn-info" onclick="start_webcam()"> Bắt đầu thanh toán</button>*@
 
                 <button class="btn btn-info" onclick="kiem_tra_thanh_toan()"> Kiểm tra thanh toán</button>
             </div>
@@ -120,6 +120,10 @@
             jpeg_quality: 90
         })
         Webcam.attach('my_camera');
+
+        setTimeout(function () {
+            const intervalID = setInterval(iter_webcam, 500);
+        }, 5000);
 
         var intervalID = 0;
         function iter_webcam() {
@@ -153,11 +157,6 @@
 
         }
 
-        function start_webcam() {
-
-            return setInterval(iter_webcam, 1000);
-        };
-
         function thanh_toan() {
             clearInterval(intervalID);
             //window.location.href = "ThanhToan/" + $("#ma").text();
@@ -174,7 +173,11 @@
                 data: formData,
                 success: function (response) {
                     //console.log(ret_lp);
-                    if (response == "1") {
+                    if (response == "0") {
+                        $("#trang_thai").text("Chưa thanh toán");
+                        
+                    }
+                    else {
                         $("#trang_thai").text("Đã thanh toán");
 
                         // gat can xe
@@ -188,9 +191,6 @@
                                 //console.log(request.responseText);
                             }
                         });
-                    }
-                    else {
-                        $("#trang_thai").text("Chưa thanh toán");
                     }
 
                 },
