@@ -133,6 +133,7 @@
                     if (ret_lp.result.length == 9) {
                         $("#imgCapture_hienthi")[0].src = $("#imgCapture")[0].src;
                         $("#img_bsx_vao")[0].src = "/assets/img/" + ret_lp.result +".jpg";
+                        //$("#img_bsx_vao")[0].src = @ViewBag.hinhanh;
                         $("#img_bsx")[0].src = "data:image/png;base64, " + ret_lp.pattern_img;
                         $("#vl_mavexe").text(ret_lp.maTheXe);
                         $("#vl_bsx").text(ret_lp.result);

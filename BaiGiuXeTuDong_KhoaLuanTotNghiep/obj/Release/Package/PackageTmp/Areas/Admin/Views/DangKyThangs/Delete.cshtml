@@ -1,0 +1,118 @@
+﻿@model BaiGiuXeTuDong_KhoaLuanTotNghiep.Models.DangKyThang
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    label {
+        color: #55ccff
+    }
+</style>
+
+<h3 style="font-weight: 500; color: #A6A9FF; text-align: center; font-size: 30px;">Xóa đăng ký</h3>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @*@Html.DisplayNameFor(model => model.HoTenKH)*@
+            <label class="control-label col-md-2">Mã số đăng ký</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaDangKy)
+        </dd>
+        <dt>
+            @*@Html.DisplayNameFor(model => model.HoTenKH)*@
+            <label class="control-label col-md-2">Họ tên khách hàng</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoTenKH)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.BienSoXe)*@
+            <label class="control-label col-md-2">Biển số xe</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BienSoXe)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.ThoiGianDangKy)*@
+            <label class="control-label col-md-2">Thời gian đăng ký</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThoiGianDangKy)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.LoaiXe)*@
+            <label class="control-label col-md-2">Loại xe</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiXe)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.TrangThai)*@
+            <label class="control-label col-md-2">Trạng thái</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrangThai)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.SDT)*@
+            <label class="control-label col-md-2">Số điện thoại</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SDT)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Email)*@
+            <label class="control-label col-md-2">Email</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.ThoiHan)*@
+            <label class="control-label col-md-2">Thời hạn sử dụng</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThoiHan)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.LoaiThanhToan.TenLoai)*@
+            <label class="control-label col-md-2">Loại thanh toán</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiThanhToan.TenLoai)
+        </dd>
+
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
+            @Html.ActionLink("Quay lại", "Index")
+        </div>
+    }
+</div>

@@ -34,6 +34,10 @@
             @*@Html.DisplayNameFor(model => model.Email)*@
             Email
         </th>
+        <!--<th>-->
+            @*@Html.DisplayNameFor(model => model.Email)*@
+            <!--Trạng thái thanh toán
+        </th>-->
         <th></th>
     </tr>
     @{int a = 0;}
@@ -41,42 +45,45 @@
     {
         string name = item.HoTenKH;
         a++;
-        <tr>
-            <td style="color:#55ccee">@a</td>
-            <td>
-                <a class="card-link " href="@Url.Action("Details", "DangKyThangs", new { id = item.MaDangKy })">
-                    @name
-                </a>
-                @*@Html.DisplayFor(modelItem => item.HoTenKH)*@
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BienSoXe)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ThoiGianDangKy)
-            </td>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.SDT)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            
-            <td>
-                @if (item.TrangThai == true)
-                {
-                    <a class="btn btn-sm btn-light border a33 text-success" href="@Url.Action("Status", "DangKyThangs", new { id = item.MaDangKy })"> <i class="fas fa-toggle-on"></i> </a>
-                }
-                else
-                {
-                    <a class="btn btn-sm btn-light border a33 text-danger" href="@Url.Action("Status", "DangKyThangs", new { id = item.MaDangKy })"> <i class="fas fa-toggle-off"></i> </a>
-                }
-                <a class="btn btn-sm btn-light border text-danger" href="@Url.Action("Delete", "DangKyThangs", new { id = item.MaDangKy })"> <i class="fas fa-trash-alt"></i></a>
-                @*@Html.ActionLink("Edit", "Edit", new { id = item.MaDangKy }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.MaDangKy })*@
-            </td>
-        </tr>
+<tr>
+    <td style="color:#55ccee">@a</td>
+    <td>
+        <a class="card-link " href="@Url.Action("Details", "DangKyThangs", new { id = item.MaDangKy })">
+            @name
+        </a>
+        @*@Html.DisplayFor(modelItem => item.HoTenKH)*@
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BienSoXe)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ThoiGianDangKy)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.SDT)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    @*<td>
+        Chưa thanh toán
+    </td>*@
+
+    <td>
+        @if (item.TrangThai == true)
+        {
+            <a class="btn btn-sm btn-light border a33 text-success" href="@Url.Action("Status", "DangKyThangs", new { id = item.MaDangKy })"> <i class="fas fa-toggle-on"></i> </a>
+        }
+        else
+        {
+            <a class="btn btn-sm btn-light border a33 text-danger" href="@Url.Action("Status", "DangKyThangs", new { id = item.MaDangKy })"> <i class="fas fa-toggle-off"></i> </a>
+        }
+        <a class="btn btn-sm btn-light border text-danger" href="@Url.Action("Delete", "DangKyThangs", new { id = item.MaDangKy })"> <i class="fas fa-trash-alt"></i></a>
+        @*@Html.ActionLink("Edit", "Edit", new { id = item.MaDangKy }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.MaDangKy })*@
+    </td>
+</tr>
     }
 
 </table>

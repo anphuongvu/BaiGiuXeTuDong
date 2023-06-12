@@ -1,0 +1,102 @@
+﻿@model BaiGiuXeTuDong_KhoaLuanTotNghiep.Models.LichSuXe
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    label {
+        color: #55ccff
+    }
+</style>
+<h3 style="font-weight: 500; color: #A6A9FF; text-align: center; font-size: 30px;">Chi tiết lịch sử xe</h3>
+<!-- Image -->
+<div class="image" style="display: flex;">
+    <div class="col-sm-4" style="text-align: center;">
+        <img src="~/Areas/Admin/assets/img/Logo.png" style="height: 300px; width: 100%; border: groove 1px;" />
+        <p style="padding-top: 5px;">Camera toàn cảnh</p>
+    </div>
+    <div class="col-sm-4" style="text-align: center; margin: 0 auto;">
+        <div style="margin: 10px 0;">
+            <img src="~/Areas/Admin/assets/img/Logo.png" style="height: 150px; width: 100%; border: groove 1px;" />
+            <p style="padding-top: 5px;">Camera biển số xe lúc vào</p>
+        </div>
+        <div>
+            <img src="~/Areas/Admin/assets/img/Logo.png" style="height: 150px; width: 100%; border: groove 1px;" />
+            <p style="padding-top: 5px;">Ảnh chụp biến số xe lúc vào</p>
+        </div>
+    </div>
+    <div class="col-sm-4" style="text-align: center; margin: 0 auto;">
+        <div style="margin: 10px 0;">
+            <img src="~/Areas/Admin/assets/img/Logo.png" style="height: 150px; width: 100%; border: groove 1px;" />
+            <p style="padding-top: 5px;">Camera biển số xe lúc ra</p>
+        </div>
+        <div>
+            <img src="~/Areas/Admin/assets/img/Logo.png" style="height: 150px; width: 100%; border: groove 1px;" />
+            <p style="padding-top: 5px;">Ảnh chụp biến số xe lúc ra</p>
+        </div>
+    </div>
+</div>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @*@Html.DisplayNameFor(model => model.MaLichSu)*@
+            <label class="control-label col-md-2">Mã lịch sử</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaLichSu)
+        </dd>
+        <dt>
+            @*@Html.DisplayNameFor(model => model.LuotVao)*@
+            <label class="control-label col-md-2">Lượt vào</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LuotVao)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.LuotRa)*@
+            <label class="control-label col-md-2">Lượt ra</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LuotRa)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.ThanhToan.MaThanhToan)*@
+            <label class="control-label col-md-2">Mã thanh toán</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThanhToan.MaThanhToan)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.TheXeNgay.MaTheXeNgay)*@
+            <label class="control-label col-md-2">Mã thẻ xe ngày</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TheXeNgay.MaTheXeNgay)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.TheXeThang.MaTheXeThang)*@
+            <label class="control-label col-md-2">Mã thẻ xe tháng</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TheXeThang.MaTheXeThang)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.MaLichSu }, new { style = "text-decoration:none; color: #55ccff;text-align:center;font-size: 14px;" }) |
+    @Html.ActionLink("Quay lại", "Index", null, new { style = "text-decoration:none; color: #55ccff;text-align:center;font-size: 14px;" })
+</p>

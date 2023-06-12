@@ -269,6 +269,7 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
                     return Json(response.Content.Remove(response.Content.Length - 2, 2) + ", \"maTheXe\": \"" + xe.MaTheXe.ToString() + "\"}");
                 }
             }
+            
 
             // xe chua tồn tại và biển số xe hợp lệ
             return Json(response.Content.Remove(response.Content.Length - 2, 2) + ", \"maTheXe\": \"\"}"); 
@@ -321,20 +322,31 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
                 xe.MaTheXe = theXeNgay.MaTheXeNgay;
 
 
-                // b64 string to img
-                Bitmap bmpReturn = null;
-                byte[] byteBuffer = Convert.FromBase64String(hinhAnhXe);
-                MemoryStream memoryStream = new MemoryStream(byteBuffer);
-                memoryStream.Position = 0;
-                bmpReturn = (Bitmap)Bitmap.FromStream(memoryStream);
-                memoryStream.Close();
-                memoryStream = null;
-                byteBuffer = null;
-                Image<Bgr, Byte> ImageFrame = new Image<Bgr, Byte>(bmpReturn);
-                string FilePath = Server.MapPath("~/assets/img/") + bsx + ".jpg";
-                CvInvoke.PutText(ImageFrame, bsx, new Point(20, 20), FontFace.HersheySimplex, 3.0, new Bgr(Color.Red).MCvScalar);
-                ImageFrame.ToBitmap().Save(FilePath, ImageFormat.Jpeg);
-                xe.HinhAnh = FilePath;
+                
+                try
+                {
+                    // b64 string to img
+                    Bitmap bmpReturn = null;
+                    byte[] byteBuffer = Convert.FromBase64String(hinhAnhXe);
+                    MemoryStream memoryStream = new MemoryStream(byteBuffer);
+                    memoryStream.Position = 0;
+                    bmpReturn = (Bitmap)Bitmap.FromStream(memoryStream);
+                    memoryStream.Close();
+                    
+                    //Image<Bgr, Byte> ImageFrame = new Image<Bgr, Byte>(bmpReturn);
+                    string FilePath = Server.MapPath("~/assets/img/") + bsx + ".jpg";
+                    //CvInvoke.PutText(ImageFrame, bsx, new Point(20, 20), FontFace.HersheySimplex, 3.0, new Bgr(Color.Red).MCvScalar);
+                    //bmpReturn.Save(FilePath, ImageFormat.Jpeg);
+                    System.IO.File.WriteAllBytes(FilePath, byteBuffer);
+                    xe.HinhAnh = FilePath;
+                    memoryStream = null;
+                    byteBuffer = null;
+                }
+                catch (Exception e)
+                {
+                    xe.HinhAnh = string.Format("data:image/png;base64,{0}", hinhAnhXe);
+                }
+
 
 
                 db.Entry(xe).State = EntityState.Modified;
@@ -467,7 +479,10 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
                     TheXeNgay theXeNgay = db.TheXeNgays.Find(int.Parse(decoded));
 
                     QRCodeGenerator QrGenerator = new QRCodeGenerator();
-                    QRCodeData QrCodeInfo = QrGenerator.CreateQrCode("https://" + HttpContext.Request.Url.Authority + "/ThanhToans/Details/" + theXeNgay.MaThanhToan.ToString(), QRCodeGenerator.ECCLevel.Q);
+
+                    IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName()); // `Dns.Resolve()` method is deprecated.
+                    IPAddress ipAddress = ipHostInfo.AddressList[1];
+                    QRCodeData QrCodeInfo = QrGenerator.CreateQrCode("https://" + ipAddress.ToString() + "/ThanhToans/Details/" + theXeNgay.MaThanhToan.ToString(), QRCodeGenerator.ECCLevel.Q);
                     QRCode QrCode = new QRCode(QrCodeInfo);
                     Bitmap QrBitmap = QrCode.GetGraphic(60);
                     byte[] BitmapArray = QrBitmap.BitmapToByteArray();

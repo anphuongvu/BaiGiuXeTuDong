@@ -74,16 +74,19 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
             QRCode QrCode = new QRCode(QrCodeInfo);
             Bitmap QrBitmap = QrCode.GetGraphic(60);
             byte[] BitmapArray = QrBitmap.BitmapToByteArray();
+            ViewBag.QRCodeTheXe = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(BitmapArray));
 
             // ma thanh toan
             QrGenerator = new QRCodeGenerator();
-            QrCodeInfo = QrGenerator.CreateQrCode("https://" + HttpContext.Request.Url.Authority + "/ThanhToans/Details/" + xe.TheXeNgay.MaThanhToan.ToString(), QRCodeGenerator.ECCLevel.Q);
+            IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName()); // `Dns.Resolve()` method is deprecated.
+            IPAddress ipAddress = ipHostInfo.AddressList[1];
+            QrCodeInfo = QrGenerator.CreateQrCode("https://" + ipAddress.ToString() + "/ThanhToans/Details/" + xe.TheXeNgay.MaThanhToan.ToString(), QRCodeGenerator.ECCLevel.Q);
             QrCode = new QRCode(QrCodeInfo);
             QrBitmap = QrCode.GetGraphic(60);
             BitmapArray = QrBitmap.BitmapToByteArray();
 
             ViewBag.QRCodeThanhToan = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(BitmapArray));
-            ViewBag.QRCodeTheXe = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(BitmapArray));
+            
             ViewBag.MaTheXe = xe.MaTheXe;
 
             return View(dangKyThang);
@@ -193,17 +196,27 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
             // save to db
             db.SaveChanges();
 
+
+
             // Ma the xe
             QRCodeGenerator QrGenerator = new QRCodeGenerator();
             QRCodeData QrCodeInfo = QrGenerator.CreateQrCode(theXeThang.MaTheXeThang.ToString(), QRCodeGenerator.ECCLevel.Q);
             QRCode QrCode = new QRCode(QrCodeInfo);
             Bitmap QrBitmap = QrCode.GetGraphic(60);
             byte[] BitmapArray = QrBitmap.BitmapToByteArray();
-
             ViewBag.QRCodeTheXe = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(BitmapArray));
-            ViewBag.MaTheXe = theXeNgay.MaTheXeNgay;
+            // ma thanh toan
+            QrGenerator = new QRCodeGenerator();
+            IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName()); // `Dns.Resolve()` method is deprecated.
+            IPAddress ipAddress = ipHostInfo.AddressList[1];
+            QrCodeInfo = QrGenerator.CreateQrCode("https://" + ipAddress.ToString() + "/ThanhToans/Details/" + xe.TheXeNgay.MaThanhToan.ToString(), QRCodeGenerator.ECCLevel.Q);
+            QrCode = new QRCode(QrCodeInfo);
+            QrBitmap = QrCode.GetGraphic(60);
+            BitmapArray = QrBitmap.BitmapToByteArray();
 
-
+            ViewBag.QRCodeThanhToan = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(BitmapArray));
+            
+            ViewBag.MaTheXe = xe.MaTheXe;
 
             return View(dangKyThang);
         }

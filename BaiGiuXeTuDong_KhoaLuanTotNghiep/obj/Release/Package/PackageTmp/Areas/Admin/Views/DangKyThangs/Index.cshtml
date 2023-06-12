@@ -1,0 +1,82 @@
+﻿@model IEnumerable<BaiGiuXeTuDong_KhoaLuanTotNghiep.Models.DangKyThang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<h3 style="font-weight: 500; color: #A6A9FF; text-align: center; font-size: 30px; margin-bottom:20px">DANH SÁCH ĐĂNG KÝ</h3>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+
+<table class="table">
+    <tr style="color:#A6A9FF">
+        <th scope="col">#</th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.HoTenKH)*@
+            Họ tên khách hàng
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.BienSoXe)*@
+            Biển số xe
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.ThoiGianDangKy)*@
+            Thời gian đăng kí
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.SDT)*@
+            Số điện thoại
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Email)*@
+            Email
+        </th>
+        <th></th>
+    </tr>
+    @{int a = 0;}
+    @foreach (var item in Model)
+    {
+        string name = item.HoTenKH;
+        a++;
+        <tr>
+            <td style="color:#55ccee">@a</td>
+            <td>
+                <a class="card-link " href="@Url.Action("Details", "DangKyThangs", new { id = item.MaDangKy })">
+                    @name
+                </a>
+                @*@Html.DisplayFor(modelItem => item.HoTenKH)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BienSoXe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThoiGianDangKy)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.SDT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            
+            <td>
+                @if (item.TrangThai == true)
+                {
+                    <a class="btn btn-sm btn-light border a33 text-success" href="@Url.Action("Status", "DangKyThangs", new { id = item.MaDangKy })"> <i class="fas fa-toggle-on"></i> </a>
+                }
+                else
+                {
+                    <a class="btn btn-sm btn-light border a33 text-danger" href="@Url.Action("Status", "DangKyThangs", new { id = item.MaDangKy })"> <i class="fas fa-toggle-off"></i> </a>
+                }
+                <a class="btn btn-sm btn-light border text-danger" href="@Url.Action("Delete", "DangKyThangs", new { id = item.MaDangKy })"> <i class="fas fa-trash-alt"></i></a>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.MaDangKy }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.MaDangKy })*@
+            </td>
+        </tr>
+    }
+
+</table>

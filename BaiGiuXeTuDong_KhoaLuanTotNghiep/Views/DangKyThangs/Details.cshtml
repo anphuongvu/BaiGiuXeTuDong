@@ -89,7 +89,7 @@
 
         <dd>
             <img id="img_thexe" style="width: 320px; height: 320px; border: groove 1px; " />
-
+            <p id="maTheXe"></p>
         </dd>
         <hr />
         <dt>
@@ -127,6 +127,7 @@
 
                             // show the xe
                             $("#img_thexe")[0].src = "@ViewBag.QRCodeTheXe";
+                            $("#maTheXe").text(@ViewBag.MaTheXe);
 
                         }
                         else {
