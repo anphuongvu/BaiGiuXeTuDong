@@ -19,6 +19,7 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Models
         {
             this.TheXeThangs = new HashSet<TheXeThang>();
             this.Xes = new HashSet<Xe>();
+            this.DangKyThangs = new HashSet<DangKyThang>();
         }
     
         public int MaLoaiXe { get; set; }
@@ -30,5 +31,7 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Models
         public virtual ICollection<TheXeThang> TheXeThangs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Xe> Xes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DangKyThang> DangKyThangs { get; set; }
     }
 }

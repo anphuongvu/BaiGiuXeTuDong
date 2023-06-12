@@ -26,5 +26,6 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Models
         public Nullable<System.DateTime> ThoiHan { get; set; }
     
         public virtual LoaiThanhToan LoaiThanhToan { get; set; }
+        public virtual LoaiXe LoaiXe1 { get; set; }
     }
 }
