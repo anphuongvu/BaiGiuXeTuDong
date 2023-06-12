@@ -1,0 +1,222 @@
+﻿@*@model IEnumerable<BaiGiuXeTuDong_KhoaLuanTotNghiep.Models.DangKyThang>*@
+@model BaiGiuXeTuDong_KhoaLuanTotNghiep.Models.DangKyThang
+
+@{
+    ViewBag.Title = "ĐĂNG KÝ GỬI XE THÁNG ONLINE";
+    Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*<label for="">Họ và tên:</label>
+            <div class="form-group">
+                @Html.LabelFor(model => model.MaDangKy, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MaDangKy, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MaDangKy, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.HoTenKH, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label class="control-label col-md-2" for="">Họ và tên:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.HoTenKH, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.HoTenKH, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @*@Html.LabelFor(model => model.BienSoXe, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <label class="control-label col-md-4" for="">Biển số xe:</label>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.BienSoXe, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.BienSoXe, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                @*@Html.LabelFor(model => model.LoaiXe, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <label class="control-label col-md-4" for="">Loại xe:</label>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.LoaiXe, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LoaiXe, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @*@Html.LabelFor(model => model.SDT, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <label class="control-label col-md-4" for="">SĐT:</label>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                @*@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <label class="control-label col-md-4" for="">Email:</label>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @*@Html.LabelFor(model => model.MaLoaiThanhToan, "MaLoaiThanhToan", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <label class="control-label col-md-4" for="">Loại thanh toán:</label>
+                <div class="col-md-8">
+                    @Html.DropDownList("MaLoaiThanhToan", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MaLoaiThanhToan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                @*@Html.LabelFor(model => model.ThoiHan, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <label class="control-label col-md-4" for="">Thời hạn:</label>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.ThoiHan, new { @type = "date", @class = "datepicker", htmlAttributes = new { @class = "form-control" } })
+                    @*@Html.EditorFor(model => model.ThoiHan, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.ValidationMessageFor(model => model.ThoiHan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Đăng ký" class="btn btn-default" style="background: linear-gradient(#a6a9ff, #55ccff); color: #fff; margin-left: 15px;"/>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+@*<div class="form-group">
+        @Html.LabelFor(model => model.ThoiGianDangKy, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ThoiGianDangKy, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ThoiGianDangKy, "", new { @class = "text-danger" })
+        </div>
+    </div>*@
+@*<div class="form-group">
+        @Html.LabelFor(model => model.TrangThai, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.TrangThai)
+                @Html.ValidationMessageFor(model => model.TrangThai, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>*@
+
+
+
+
+
+
+@*<style>
+        .formInfo {
+            margin: 30px 100px;
+            border: #A6A9FF solid 1px;
+            height: 100%;
+        }
+        .form {
+            color: #A6A9FF;
+            font-size: 16px;
+            margin: 10px;
+            padding: 10px;
+        }
+    </style>
+    <div class="row" style="padding-right: 0;">
+        <div class="formInfo">
+            <form>
+                <div class="form-group col-md-12">
+                    <label for="">Họ và tên:</label>
+                    <input type="text" class="form-control" id="" placeholder="Nguyễn Văn A">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Biển số xe:</label>
+                        <input type="text" class="form-control" id="" placeholder="81A-12345">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputState">Loại xe:</label>
+                        <select id="inputState" class="form-control">
+                            <option selected>Xe máy</option>
+                            <option>Xe đạp</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Số điện thoại:</label>
+                        <input type="text" class="form-control" id="inputCity" placeholder="0123943245">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Email:</label>
+                        <input type="email" class="form-control" id="inputEmail4"
+                               placeholder="nguyenvana@gmail.com">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputState">Thời hạn đăng ký (Tháng):</label>
+                        <div>
+                            <span class="minus"
+                                  style="width: 30px; height: 30px; text-align: center; border: 1px solid #e8f8ff; background-color: #eeeefe;">-</span>
+                            <span type="text"
+                                  style="width: 30px; height: 30px; text-align: center; border: 1px solid #e8f8ff;"
+                                  class="num">01</span>
+                            <span class="plus"
+                                  style="width: 30px; height: 30px; text-align: center; border: 1px solid #e8f8ff;  background-color: #eeeefe;">+</span>
+                        </div>
+                         <select id="inputState" class="form-control">
+                            <option selected>Choose...</option>
+                            <option>...</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputState">Phương thức thanh toán:</label>
+                        <select id="inputState" class="form-control">
+                            <option selected>Thanh toán bằng ví Momo</option>
+                            <option>Thanh toán online bằng Stripe</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn"
+                        style="background: linear-gradient(#a6a9ff, #55ccff); color: #fff; margin-left: 15px;">
+                    Đăng
+                    ký
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const plus = document.querySelector(".plus"),
+            minus = document.querySelector(".minus"),
+            num = document.querySelector(".num");
+
+        let a = 1;
+        plus.addEventListener("click", () => {
+            a++;
+            a = (a < 10) ? "0" + a : a;
+            num.innerText = a;
+            console.log(a);
+        });
+        minus.addEventListener("click", () => {
+            if (a > 1) {
+                a--;
+                a = (a < 10) ? "0" + a : a;
+            }
+            num.innerText = a;
+            console.log(a);
+        });
+    </script>*@

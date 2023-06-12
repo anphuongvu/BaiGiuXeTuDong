@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLBaiGiuXeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BaiDauXe">
+    <Key>
+      <PropertyRef Name="MaBaiDauXe" />
+    </Key>
+    <Property Name="MaBaiDauXe" Type="Int32" Nullable="false" />
+    <Property Name="MaLoaiXe" Type="Int32" />
+    <Property Name="SoChoTrong" Type="Int32" />
+    <NavigationProperty Name="LoaiXes" Relationship="Self.FK_LoaiXe_BaiDauXe" FromRole="BaiDauXe" ToRole="LoaiXe" />
+    <NavigationProperty Name="ViTriDauXes" Relationship="Self.FK_ViTriDauXe_BaiDauXe" FromRole="BaiDauXe" ToRole="ViTriDauXe" />
+  </EntityType>
+  <EntityType Name="DangKyThang">
+    <Key>
+      <PropertyRef Name="MaDangKy" />
+    </Key>
+    <Property Name="MaDangKy" Type="Int32" Nullable="false" />
+    <Property Name="HoTenKH" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="BienSoXe" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ThoiGianDangKy" Type="DateTime" Precision="0" />
+    <Property Name="LoaiXe" Type="Int32" />
+    <Property Name="MaLoaiThanhToan" Type="Int32" />
+    <Property Name="TrangThai" Type="Boolean" />
+    <Property Name="SDT" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ThoiHan" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="LoaiThanhToan" Relationship="Self.FK_DangKyThang_LoaiThanhToan" FromRole="DangKyThang" ToRole="LoaiThanhToan" />
+  </EntityType>
+  <EntityType Name="LichSuXe">
+    <Key>
+      <PropertyRef Name="MaLichSu" />
+    </Key>
+    <Property Name="MaLichSu" Type="Int32" Nullable="false" />
+    <Property Name="LuotVao" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="LuotRa" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="MaTheXeNgay" Type="Int32" />
+    <Property Name="MaTheXeThang" Type="Int32" />
+    <Property Name="MaThanhToan" Type="Int32" />
+    <NavigationProperty Name="ThanhToan" Relationship="Self.FK_LichSuXe_ThanhToan" FromRole="LichSuXe" ToRole="ThanhToan" />
+    <NavigationProperty Name="TheXeNgay" Relationship="Self.FK_LichSuXe_TheXeNgay" FromRole="LichSuXe" ToRole="TheXeNgay" />
+    <NavigationProperty Name="TheXeThang" Relationship="Self.FK_LichSuXe_TheXeThang" FromRole="LichSuXe" ToRole="TheXeThang" />
+  </EntityType>
+  <EntityType Name="LoaiThanhToan">
+    <Key>
+      <PropertyRef Name="MaLoaiThanhToan" />
+    </Key>
+    <Property Name="MaLoaiThanhToan" Type="Int32" Nullable="false" />
+    <Property Name="TenLoai" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DangKyThangs" Relationship="Self.FK_DangKyThang_LoaiThanhToan" FromRole="LoaiThanhToan" ToRole="DangKyThang" />
+    <NavigationProperty Name="ThanhToans" Relationship="Self.FK_ThanhToan_LoaiThanhToan" FromRole="LoaiThanhToan" ToRole="ThanhToan" />
+  </EntityType>
+  <EntityType Name="LoaiXe">
+    <Key>
+      <PropertyRef Name="MaLoaiXe" />
+    </Key>
+    <Property Name="MaLoaiXe" Type="Int32" Nullable="false" />
+    <Property Name="MaBaiDauXe" Type="Int32" />
+    <Property Name="TenLoaiXe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="BaiDauXe" Relationship="Self.FK_LoaiXe_BaiDauXe" FromRole="LoaiXe" ToRole="BaiDauXe" />
+    <NavigationProperty Name="TheXeThangs" Relationship="Self.FK_TheXeThang_LoaiXe" FromRole="LoaiXe" ToRole="TheXeThang" />
+    <NavigationProperty Name="Xes" Relationship="Self.FK_Xe_LoaiXe" FromRole="LoaiXe" ToRole="Xe" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="ThanhToan">
+    <Key>
+      <PropertyRef Name="MaThanhToan" />
+    </Key>
+    <Property Name="MaThanhToan" Type="Int32" Nullable="false" />
+    <Property Name="MaTheXe" Type="Int32" />
+    <Property Name="SoTien" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="TrangThai" Type="Boolean" />
+    <Property Name="MaLoaiThanhToan" Type="Int32" />
+    <NavigationProperty Name="LichSuXes" Relationship="Self.FK_LichSuXe_ThanhToan" FromRole="ThanhToan" ToRole="LichSuXe" />
+    <NavigationProperty Name="LoaiThanhToan" Relationship="Self.FK_ThanhToan_LoaiThanhToan" FromRole="ThanhToan" ToRole="LoaiThanhToan" />
+    <NavigationProperty Name="TheXeNgays" Relationship="Self.FK_TheXeNgay_ThanhToan" FromRole="ThanhToan" ToRole="TheXeNgay" />
+    <NavigationProperty Name="TheXeThangs" Relationship="Self.FK_TheXeThang_ThanhToan" FromRole="ThanhToan" ToRole="TheXeThang" />
+  </EntityType>
+  <EntityType Name="TheXeNgay">
+    <Key>
+      <PropertyRef Name="MaTheXeNgay" />
+    </Key>
+    <Property Name="MaTheXeNgay" Type="Int32" Nullable="false" />
+    <Property Name="MaViTri" Type="Int32" />
+    <Property Name="GioVao" Type="DateTime" Precision="0" />
+    <Property Name="GioRa" Type="DateTime" Precision="0" />
+    <Property Name="TrangThai" Type="Boolean" />
+    <Property Name="MaThanhToan" Type="Int32" />
+    <NavigationProperty Name="LichSuXes" Relationship="Self.FK_LichSuXe_TheXeNgay" FromRole="TheXeNgay" ToRole="LichSuXe" />
+    <NavigationProperty Name="ThanhToan" Relationship="Self.FK_TheXeNgay_ThanhToan" FromRole="TheXeNgay" ToRole="ThanhToan" />
+    <NavigationProperty Name="ViTriDauXe" Relationship="Self.FK_TheXeNgay_ViTriDauXe" FromRole="TheXeNgay" ToRole="ViTriDauXe" />
+    <NavigationProperty Name="Xes" Relationship="Self.FK_Xe_TheXeNgay" FromRole="TheXeNgay" ToRole="Xe" />
+  </EntityType>
+  <EntityType Name="TheXeThang">
+    <Key>
+      <PropertyRef Name="MaTheXeThang" />
+    </Key>
+    <Property Name="MaTheXeThang" Type="Int32" Nullable="false" />
+    <Property Name="MaThanhToan" Type="Int32" />
+    <Property Name="MaLoaiXe" Type="Int32" />
+    <Property Name="TrangThai" Type="Boolean" />
+    <Property Name="GioVao" Type="DateTime" Precision="0" />
+    <Property Name="GioRa" Type="DateTime" Precision="0" />
+    <Property Name="ViTri" Type="Int32" />
+    <NavigationProperty Name="LichSuXes" Relationship="Self.FK_LichSuXe_TheXeThang" FromRole="TheXeThang" ToRole="LichSuXe" />
+    <NavigationProperty Name="LoaiXe" Relationship="Self.FK_TheXeThang_LoaiXe" FromRole="TheXeThang" ToRole="LoaiXe" />
+    <NavigationProperty Name="ThanhToan" Relationship="Self.FK_TheXeThang_ThanhToan" FromRole="TheXeThang" ToRole="ThanhToan" />
+  </EntityType>
+  <EntityType Name="ViTriDauXe">
+    <Key>
+      <PropertyRef Name="MaViTri" />
+    </Key>
+    <Property Name="MaViTri" Type="Int32" Nullable="false" />
+    <Property Name="MaBaiDauXe" Type="Int32" />
+    <Property Name="DonGia" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="TrangThai" Type="Boolean" />
+    <Property Name="SoGioDauXe" Type="Int32" />
+    <NavigationProperty Name="BaiDauXe" Relationship="Self.FK_ViTriDauXe_BaiDauXe" FromRole="ViTriDauXe" ToRole="BaiDauXe" />
+    <NavigationProperty Name="TheXeNgays" Relationship="Self.FK_TheXeNgay_ViTriDauXe" FromRole="ViTriDauXe" ToRole="TheXeNgay" />
+  </EntityType>
+  <EntityType Name="Xe">
+    <Key>
+      <PropertyRef Name="BienSo" />
+    </Key>
+    <Property Name="BienSo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaTheXe" Type="Int32" />
+    <Property Name="MaLoaiXe" Type="Int32" />
+    <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="LoaiXe" Relationship="Self.FK_Xe_LoaiXe" FromRole="Xe" ToRole="LoaiXe" />
+    <NavigationProperty Name="TheXeNgay" Relationship="Self.FK_Xe_TheXeNgay" FromRole="Xe" ToRole="TheXeNgay" />
+  </EntityType>
+  <Association Name="FK_LoaiXe_BaiDauXe">
+    <End Role="BaiDauXe" Type="Self.BaiDauXe" Multiplicity="0..1" />
+    <End Role="LoaiXe" Type="Self.LoaiXe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BaiDauXe">
+        <PropertyRef Name="MaBaiDauXe" />
+      </Principal>
+      <Dependent Role="LoaiXe">
+        <PropertyRef Name="MaBaiDauXe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ViTriDauXe_BaiDauXe">
+    <End Role="BaiDauXe" Type="Self.BaiDauXe" Multiplicity="0..1" />
+    <End Role="ViTriDauXe" Type="Self.ViTriDauXe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BaiDauXe">
+        <PropertyRef Name="MaBaiDauXe" />
+      </Principal>
+      <Dependent Role="ViTriDauXe">
+        <PropertyRef Name="MaBaiDauXe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DangKyThang_LoaiThanhToan">
+    <End Role="LoaiThanhToan" Type="Self.LoaiThanhToan" Multiplicity="0..1" />
+    <End Role="DangKyThang" Type="Self.DangKyThang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiThanhToan">
+        <PropertyRef Name="MaLoaiThanhToan" />
+      </Principal>
+      <Dependent Role="DangKyThang">
+        <PropertyRef Name="MaLoaiThanhToan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LichSuXe_ThanhToan">
+    <End Role="ThanhToan" Type="Self.ThanhToan" Multiplicity="0..1" />
+    <End Role="LichSuXe" Type="Self.LichSuXe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ThanhToan">
+        <PropertyRef Name="MaThanhToan" />
+      </Principal>
+      <Dependent Role="LichSuXe">
+        <PropertyRef Name="MaThanhToan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LichSuXe_TheXeNgay">
+    <End Role="TheXeNgay" Type="Self.TheXeNgay" Multiplicity="0..1" />
+    <End Role="LichSuXe" Type="Self.LichSuXe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TheXeNgay">
+        <PropertyRef Name="MaTheXeNgay" />
+      </Principal>
+      <Dependent Role="LichSuXe">
+        <PropertyRef Name="MaTheXeNgay" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LichSuXe_TheXeThang">
+    <End Role="TheXeThang" Type="Self.TheXeThang" Multiplicity="0..1" />
+    <End Role="LichSuXe" Type="Self.LichSuXe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TheXeThang">
+        <PropertyRef Name="MaTheXeThang" />
+      </Principal>
+      <Dependent Role="LichSuXe">
+        <PropertyRef Name="MaTheXeThang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ThanhToan_LoaiThanhToan">
+    <End Role="LoaiThanhToan" Type="Self.LoaiThanhToan" Multiplicity="0..1" />
+    <End Role="ThanhToan" Type="Self.ThanhToan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiThanhToan">
+        <PropertyRef Name="MaLoaiThanhToan" />
+      </Principal>
+      <Dependent Role="ThanhToan">
+        <PropertyRef Name="MaLoaiThanhToan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TheXeThang_LoaiXe">
+    <End Role="LoaiXe" Type="Self.LoaiXe" Multiplicity="0..1" />
+    <End Role="TheXeThang" Type="Self.TheXeThang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiXe">
+        <PropertyRef Name="MaLoaiXe" />
+      </Principal>
+      <Dependent Role="TheXeThang">
+        <PropertyRef Name="MaLoaiXe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Xe_LoaiXe">
+    <End Role="LoaiXe" Type="Self.LoaiXe" Multiplicity="0..1" />
+    <End Role="Xe" Type="Self.Xe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiXe">
+        <PropertyRef Name="MaLoaiXe" />
+      </Principal>
+      <Dependent Role="Xe">
+        <PropertyRef Name="MaLoaiXe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TheXeNgay_ThanhToan">
+    <End Role="ThanhToan" Type="Self.ThanhToan" Multiplicity="0..1" />
+    <End Role="TheXeNgay" Type="Self.TheXeNgay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ThanhToan">
+        <PropertyRef Name="MaThanhToan" />
+      </Principal>
+      <Dependent Role="TheXeNgay">
+        <PropertyRef Name="MaThanhToan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TheXeThang_ThanhToan">
+    <End Role="ThanhToan" Type="Self.ThanhToan" Multiplicity="0..1" />
+    <End Role="TheXeThang" Type="Self.TheXeThang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ThanhToan">
+        <PropertyRef Name="MaThanhToan" />
+      </Principal>
+      <Dependent Role="TheXeThang">
+        <PropertyRef Name="MaThanhToan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TheXeNgay_ViTriDauXe">
+    <End Role="ViTriDauXe" Type="Self.ViTriDauXe" Multiplicity="0..1" />
+    <End Role="TheXeNgay" Type="Self.TheXeNgay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ViTriDauXe">
+        <PropertyRef Name="MaViTri" />
+      </Principal>
+      <Dependent Role="TheXeNgay">
+        <PropertyRef Name="MaViTri" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Xe_TheXeNgay">
+    <End Role="TheXeNgay" Type="Self.TheXeNgay" Multiplicity="0..1" />
+    <End Role="Xe" Type="Self.Xe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TheXeNgay">
+        <PropertyRef Name="MaTheXeNgay" />
+      </Principal>
+      <Dependent Role="Xe">
+        <PropertyRef Name="MaTheXe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QLBaiGiuXeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BaiDauXes" EntityType="Self.BaiDauXe" />
+    <EntitySet Name="DangKyThangs" EntityType="Self.DangKyThang" />
+    <EntitySet Name="LichSuXes" EntityType="Self.LichSuXe" />
+    <EntitySet Name="LoaiThanhToans" EntityType="Self.LoaiThanhToan" />
+    <EntitySet Name="LoaiXes" EntityType="Self.LoaiXe" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="ThanhToans" EntityType="Self.ThanhToan" />
+    <EntitySet Name="TheXeNgays" EntityType="Self.TheXeNgay" />
+    <EntitySet Name="TheXeThangs" EntityType="Self.TheXeThang" />
+    <EntitySet Name="ViTriDauXes" EntityType="Self.ViTriDauXe" />
+    <EntitySet Name="Xes" EntityType="Self.Xe" />
+    <AssociationSet Name="FK_LoaiXe_BaiDauXe" Association="Self.FK_LoaiXe_BaiDauXe">
+      <End Role="BaiDauXe" EntitySet="BaiDauXes" />
+      <End Role="LoaiXe" EntitySet="LoaiXes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ViTriDauXe_BaiDauXe" Association="Self.FK_ViTriDauXe_BaiDauXe">
+      <End Role="BaiDauXe" EntitySet="BaiDauXes" />
+      <End Role="ViTriDauXe" EntitySet="ViTriDauXes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DangKyThang_LoaiThanhToan" Association="Self.FK_DangKyThang_LoaiThanhToan">
+      <End Role="LoaiThanhToan" EntitySet="LoaiThanhToans" />
+      <End Role="DangKyThang" EntitySet="DangKyThangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LichSuXe_ThanhToan" Association="Self.FK_LichSuXe_ThanhToan">
+      <End Role="ThanhToan" EntitySet="ThanhToans" />
+      <End Role="LichSuXe" EntitySet="LichSuXes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LichSuXe_TheXeNgay" Association="Self.FK_LichSuXe_TheXeNgay">
+      <End Role="TheXeNgay" EntitySet="TheXeNgays" />
+      <End Role="LichSuXe" EntitySet="LichSuXes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LichSuXe_TheXeThang" Association="Self.FK_LichSuXe_TheXeThang">
+      <End Role="TheXeThang" EntitySet="TheXeThangs" />
+      <End Role="LichSuXe" EntitySet="LichSuXes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ThanhToan_LoaiThanhToan" Association="Self.FK_ThanhToan_LoaiThanhToan">
+      <End Role="LoaiThanhToan" EntitySet="LoaiThanhToans" />
+      <End Role="ThanhToan" EntitySet="ThanhToans" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TheXeThang_LoaiXe" Association="Self.FK_TheXeThang_LoaiXe">
+      <End Role="LoaiXe" EntitySet="LoaiXes" />
+      <End Role="TheXeThang" EntitySet="TheXeThangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Xe_LoaiXe" Association="Self.FK_Xe_LoaiXe">
+      <End Role="LoaiXe" EntitySet="LoaiXes" />
+      <End Role="Xe" EntitySet="Xes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TheXeNgay_ThanhToan" Association="Self.FK_TheXeNgay_ThanhToan">
+      <End Role="ThanhToan" EntitySet="ThanhToans" />
+      <End Role="TheXeNgay" EntitySet="TheXeNgays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TheXeThang_ThanhToan" Association="Self.FK_TheXeThang_ThanhToan">
+      <End Role="ThanhToan" EntitySet="ThanhToans" />
+      <End Role="TheXeThang" EntitySet="TheXeThangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TheXeNgay_ViTriDauXe" Association="Self.FK_TheXeNgay_ViTriDauXe">
+      <End Role="ViTriDauXe" EntitySet="ViTriDauXes" />
+      <End Role="TheXeNgay" EntitySet="TheXeNgays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Xe_TheXeNgay" Association="Self.FK_Xe_TheXeNgay">
+      <End Role="TheXeNgay" EntitySet="TheXeNgays" />
+      <End Role="Xe" EntitySet="Xes" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(QLBaiGiuXeModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(QLBaiGiuXeModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

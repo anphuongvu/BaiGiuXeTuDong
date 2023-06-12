@@ -10,7 +10,6 @@
         <EntityTypeShape EntityType="QLBaiGiuXeModel.LichSuXe" Width="1.5" PointX="7.375" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="QLBaiGiuXeModel.LoaiThanhToan" Width="1.5" PointX="2.875" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="QLBaiGiuXeModel.LoaiXe" Width="1.5" PointX="3.5" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLBaiGiuXeModel.sysdiagram" Width="1.5" PointX="15.25" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="QLBaiGiuXeModel.ThanhToan" Width="1.5" PointX="4.875" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="QLBaiGiuXeModel.TheXeNgay" Width="1.5" PointX="9.875" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="QLBaiGiuXeModel.TheXeThang" Width="1.5" PointX="7.25" PointY="1.25" IsExpanded="true" />

@@ -1,0 +1,145 @@
+﻿@model BaiGiuXeTuDong_KhoaLuanTotNghiep.Models.DangKyThang
+
+@{
+    ViewBag.Title = "Thanh toán";
+    Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
+}
+
+<div>
+    <h4>Thanh Toán</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên Khách hàng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoTenKH)
+        </dd>
+
+        <dt>
+            Biển số xe
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BienSoXe)
+        </dd>
+
+        <dt>
+            Thời gian đăng ký
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThoiGianDangKy)
+        </dd>
+
+        <dt>
+            Loại Xe
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiXe)
+        </dd>
+
+
+        <dt>
+            Số điện thoại
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SDT)
+        </dd>
+
+        <dt>
+            Email
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            Thời hạn
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThoiHan)
+        </dd>
+
+        <dt>
+            Loại hình thanh toán
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiThanhToan.TenLoai)
+        </dd>
+
+        <dt>
+            Mã thanh toán
+        </dt>
+
+        <dd>
+            <img id="img_bc" src="@ViewBag.QRCodeThanhToan" style="width: 320px; height: 320px; border: groove 1px; " />
+
+        </dd>
+
+        <dt>
+            Mã thẻ xe
+        </dt>
+
+        <dd>
+            <img id="img_thexe" style="width: 320px; height: 320px; border: groove 1px; " />
+
+        </dd>
+        <hr />
+        <dt>
+            Trạng thái
+        </dt>
+
+        <dd>
+            <button class="btn btn-info" onclick="kiem_tra_thanh_toan()"> Kiểm tra trạng thái</button>
+            <p id="trang_thai" style="margin-top: 10px;"></p>
+        </dd>
+    </dl>
+</div>
+
+@section script{
+    <script language="Javascript">
+
+
+        // todo: mathe xe
+        function kiem_tra_thanh_toan() {
+            let formData = {
+                maTheXe: @ViewBag.MaTheXe
+            }
+            $.ajax({
+                url: "/Xes/kiemTraThangThai",
+                type: "POST",
+                data: formData,
+                success: function (response) {
+                    //console.log(ret_lp);
+                    if (response == "1") {
+                        $("#trang_thai").text("Đã thanh toán & chưa xác nhận");
+                    }
+                    else {
+                        if (response == "2") {
+                            $("#trang_thai").text("Đã thanh toán & xác nhận");
+
+                            // show the xe
+                            $("#img_thexe")[0].src = "@ViewBag.QRCodeTheXe";
+
+                        }
+                        else {
+                            $("#trang_thai").text("Chưa thanh toán");
+                        }
+                    }
+
+                },
+                error: function (request, status, error) {
+                    //console.log(request.responseText);
+                }
+            });
+        }
+
+    </script>
+}

@@ -60,16 +60,6 @@
     <NavigationProperty Name="TheXeThangs" Relationship="Self.FK_TheXeThang_LoaiXe" FromRole="LoaiXe" ToRole="TheXeThang" />
     <NavigationProperty Name="Xes" Relationship="Self.FK_Xe_LoaiXe" FromRole="LoaiXe" ToRole="Xe" />
   </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
   <EntityType Name="ThanhToan">
     <Key>
       <PropertyRef Name="MaThanhToan" />
@@ -299,7 +289,6 @@
     <EntitySet Name="LichSuXes" EntityType="Self.LichSuXe" />
     <EntitySet Name="LoaiThanhToans" EntityType="Self.LoaiThanhToan" />
     <EntitySet Name="LoaiXes" EntityType="Self.LoaiXe" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="ThanhToans" EntityType="Self.ThanhToan" />
     <EntitySet Name="TheXeNgays" EntityType="Self.TheXeNgay" />
     <EntitySet Name="TheXeThangs" EntityType="Self.TheXeThang" />

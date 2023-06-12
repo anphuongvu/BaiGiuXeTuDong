@@ -1,0 +1,131 @@
+﻿@model IEnumerable<BaiGiuXeTuDong_KhoaLuanTotNghiep.Models.LichSuXe>
+
+@{
+    ViewBag.Title = "THÔNG TIN XE RA";
+    Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
+}
+
+<!-- Image -->
+<div class="image" style="display: flex;">
+    <div class="col-sm-4" style="text-align: center;">
+        <img src="/assets/img/Logo.png" style="height: 280px; width: 100%; border: groove 1px;" />
+        <p style="padding-top: 5px;">Camera toàn cảnh</p>
+    </div>
+    <div class="col-sm-4" style="text-align: center; margin: 0 auto;">
+        <div style="margin: 10px 0;">
+            <img src="/assets/img/Logo.png" style="height: 125px; width: 100%; border: groove 1px;" />
+            <p style="padding-top: 5px;">Camera biển số xe lúc vào</p>
+        </div>
+        <div>
+            <img src="/assets/img/Logo.png" style="height: 125px; width: 100%; border: groove 1px;" />
+            <p style="padding-top: 5px;">Ảnh chụp biến số xe lúc vào</p>
+        </div>
+    </div>
+    <div class="col-sm-4" style="text-align: center; margin: 0 auto;">
+        <div style="margin: 10px 0;">
+            <img src="/assets/img/Logo.png" style="height: 125px; width: 100%; border: groove 1px;" />
+            <p style="padding-top: 5px;">Camera biển số xe lúc ra</p>
+        </div>
+        <div>
+            <img src="/assets/img/Logo.png" style="height: 125px; width: 100%; border: groove 1px;" />
+            <p style="padding-top: 5px;">Ảnh chụp biến số xe lúc ra</p>
+        </div>
+    </div>
+</div>
+<!-- Infomation -->
+<div class="row" style="margin-top: 20px;">
+    <div class="col-sm-4" style="display: flex;">
+        <label for="" style="margin-right: 10px; color: #55ccff;">Mã vé xe:</label>
+        <p>1233132817236821</p>
+    </div>
+    <div class="col-sm-4" style="display: flex;">
+        <label for="" style="margin-right: 10px; color: #55ccff;">Biển số xe:</label>
+        <p>1233132817236821</p>
+    </div>
+    <div class="col-sm-4" style="display: flex;">
+        <label for="" style="margin-right: 10px; color: #55ccff;">Thời gian:</label>
+        <p>1233132817236821</p>
+    </div>
+</div>
+<div class="row" style="margin-top: 10px;">
+    <div class="col-sm-4" style="display: flex; align-items: center;">
+        <label for="" style="margin-right: 10px; color: #55ccff;">Loại xe:</label>
+        <select id="inputState" class="form-control" style="width: 150px;">
+            <option selected>Xe máy</option>
+            <option>Xe đạp</option>
+        </select>
+    </div>
+    <div class="col-sm-4" style="display: flex; align-items: center;">
+        <label for="" style="margin-right: 10px; color: #55ccff;">Loại vé:</label>
+        <select id="inputState" class="form-control" style="width: 150px;">
+            <option selected>Vé lượt</option>
+            <option>Vé tháng</option>
+        </select>
+    </div>
+    <div class="col-sm-4" style="display: flex;">
+        <label for="" style="margin-right: 10px; color: #55ccff;">Bãi xe:</label>
+        <p>1233132817236821</p>
+    </div>
+</div>
+<div class="row" style="padding-left:10px; display: flex; align-items: center; text-align: center;">
+    <div style="width:90px; height: 30px; background: linear-gradient(#a6a9ff, #55ccff) ;  text-align:center; border-radius:5px; margin:20px 0; font-size: 14px; padding-top: 5px;">
+        <!-- @Html.ActionLink("Thêm mới", "Create", null, new { style = "text-decoration:none; color: #fff;text-align:center;" }) -->
+        <a href="" style="text-decoration: none; color: #fff; font-size: 14px;">Thanh toán</a>
+    </div>
+    <div class="checkBox">
+        <i class='bx bx-check-circle'></i>
+        <p style="margin-top: 10px;">Thành công</p>
+    </div>
+</div>
+
+@*<h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LuotVao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LuotRa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThanhToan.MaThanhToan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TheXeNgay.MaTheXeNgay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TheXeThang.MaTheXeThang)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LuotVao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LuotRa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThanhToan.MaThanhToan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TheXeNgay.MaTheXeNgay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TheXeThang.MaTheXeThang)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.MaLichSu }) |
+                @Html.ActionLink("Details", "Details", new { id=item.MaLichSu }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.MaLichSu })
+            </td>
+        </tr>
+    }
+
+    </table>*@

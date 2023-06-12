@@ -32,7 +32,6 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Models
         public virtual DbSet<LichSuXe> LichSuXes { get; set; }
         public virtual DbSet<LoaiThanhToan> LoaiThanhToans { get; set; }
         public virtual DbSet<LoaiXe> LoaiXes { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<ThanhToan> ThanhToans { get; set; }
         public virtual DbSet<TheXeNgay> TheXeNgays { get; set; }
         public virtual DbSet<TheXeThang> TheXeThangs { get; set; }

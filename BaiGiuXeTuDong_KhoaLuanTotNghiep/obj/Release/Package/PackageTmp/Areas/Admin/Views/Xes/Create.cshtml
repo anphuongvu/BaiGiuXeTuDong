@@ -1,0 +1,108 @@
+﻿@model BaiGiuXeTuDong_KhoaLuanTotNghiep.Models.Xe
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    #btnThem:hover {
+        background: linear-gradient(#A6A9FF, #55CCFF);
+        color:#fff;
+    }
+    .control-label{
+        color: #55ccff;
+        font-size: 14px;
+        font-weight: bold;
+    }
+</style>
+
+<h3 style="font-weight: 500; color: #A6A9FF; font-size: 30px;">Thêm xe mới</h3>
+<!-- Image -->
+<div class="image" style="display: flex;">
+    <div class="col-sm-6" style="text-align: center;">
+        <img src="~/Areas/Admin/assets/img/Logo.png" style="height: 280px; width: 100%; border: groove 1px;" />
+        <p style="padding-top: 5px;">Camera toàn cảnh</p>
+    </div>
+    <div class="col-sm-6" style="text-align: center; margin: 0 auto;">
+        <div style="margin: 10px 0;">
+            <img src="~/Areas/Admin/assets/img/Logo.png" style="height: 125px; width: 100%; border: groove 1px;" />
+            <p style="padding-top: 5px;">Camera biển số xe</p>
+        </div>
+        <div>
+            <img src="~/Areas/Admin/assets/img/Logo.png" style="height: 125px; width: 100%; border: groove 1px;" />
+            <p style="padding-top: 5px;">Ảnh chụp biển số xe</p>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.BienSo, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <p class="control-label col-sm-4">Biển số: </p>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.BienSo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.BienSo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <p class="control-label col-sm-4">Mã thẻ xe: </p>
+                    @*@Html.LabelFor(model => model.MaTheXe, "MaTheXe", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <div class="col-md-8">
+                        @Html.DropDownList("MaTheXe", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MaTheXe, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.MaLoaiXe, "MaLoaiXe", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <p class="control-label col-sm-4">Mã loại xe: </p>
+                    <div class="col-md-8">
+                        @Html.DropDownList("MaLoaiXe", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MaLoaiXe, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.HinhAnh, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <p class="control-label col-sm-4">Hình ảnh: </p>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.HinhAnh, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.HinhAnh, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+
+            </div>
+            <div class="col-sm-4">
+
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Thêm mới" class="btn btn-default" id="btnThem"/>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Quay lại", "Index", null, new { style = "text-decoration:none; color: #55ccff;text-align:center;font-size: 14px;" })
+</div>

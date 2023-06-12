@@ -1,0 +1,70 @@
+﻿@model BaiGiuXeTuDong_KhoaLuanTotNghiep.Models.Xe
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    label {
+        color: #55ccff
+    }
+</style>
+<h3 style="font-weight: 500; color: #A6A9FF; text-align: center; font-size: 30px;">Chỉnh sửa thông tin xe</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @*@Html.HiddenFor(model => model.BienSo)*@
+
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.BienSo, "BienSo", htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <label class = "control-label col-md-2" >Biển số xe</label>
+        <div class="col-md-10" style="width: 150px">
+            @Html.EditorFor(model => model.BienSo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.BienSo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.MaTheXe, "MaTheXe", htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <label class="control-label col-md-2">Mã Thẻ Xe</label>
+        <div class="col-md-10">
+            @Html.DropDownList("MaTheXe", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.MaTheXe, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.MaLoaiXe, "MaLoaiXe", htmlAttributes: new { @class = "control-label col-md-2" })*@        
+        <label class="control-label col-md-2">Mã Loại Xe</label>
+        <div class="col-md-10">
+            @Html.DropDownList("MaLoaiXe", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.MaLoaiXe, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.HinhAnh, htmlAttributes: new { @class = "control-label col-md-2" })*@        
+        <label class="control-label col-md-2">Hình ảnh</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.HinhAnh, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.HinhAnh, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Lưu thông tin" class="btn btn-default" style="background: linear-gradient(#A6A9FF,#55ccff); border-color: #55ccff; color:#fff; width: 120px; height: 30px;border-style: unset; border-radius:5px;" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Quay lại", "Index",null, new { style = "text-decoration:none; color: #55ccff;text-align:center;font-size: 14px;" } )
+</div>
