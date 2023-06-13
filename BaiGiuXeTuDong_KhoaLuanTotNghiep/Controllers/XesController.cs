@@ -373,10 +373,7 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
         [HttpGet]
         public JsonResult GatCanXeVao()
         {
-            myServo = new SerialPort();
-            myServo.BaudRate = 9600;
-            myServo.PortName = "COM5";
-            myServo.Open();
+            myServo = GlobalData.initSerialPort();
             if (myServo.IsOpen)
             {
                 int pin = 0;
@@ -386,17 +383,13 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
                 myServo.Write(pin.ToString() + ":0");
 
             }
-            myServo.Close();
             return Json("OK");
         }
 
         [HttpGet]
         public JsonResult GatCanXeRa()
         {
-            myServo = new SerialPort();
-            myServo.BaudRate = 9600;
-            myServo.PortName = "COM5";
-            myServo.Open();
+            myServo = GlobalData.initSerialPort();
             if (myServo.IsOpen)
             {
                 int pin = 0;
@@ -406,7 +399,6 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
                 myServo.Write(pin.ToString() + ":0");
 
             }
-            myServo.Close();
             return Json("OK");
         }
 
@@ -479,10 +471,7 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
                     TheXeNgay theXeNgay = db.TheXeNgays.Find(int.Parse(decoded));
 
                     QRCodeGenerator QrGenerator = new QRCodeGenerator();
-
-                    IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName()); // `Dns.Resolve()` method is deprecated.
-                    IPAddress ipAddress = ipHostInfo.AddressList[1];
-                    QRCodeData QrCodeInfo = QrGenerator.CreateQrCode("https://" + ipAddress.ToString() + "/ThanhToans/Details/" + theXeNgay.MaThanhToan.ToString(), QRCodeGenerator.ECCLevel.Q);
+                    QRCodeData QrCodeInfo = QrGenerator.CreateQrCode("https://" + GlobalData.initIP()+ "/ThanhToans/Details/" + theXeNgay.MaThanhToan.ToString(), QRCodeGenerator.ECCLevel.Q);
                     QRCode QrCode = new QRCode(QrCodeInfo);
                     Bitmap QrBitmap = QrCode.GetGraphic(60);
                     byte[] BitmapArray = QrBitmap.BitmapToByteArray();

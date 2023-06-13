@@ -78,9 +78,7 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
 
             // ma thanh toan
             QrGenerator = new QRCodeGenerator();
-            IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName()); // `Dns.Resolve()` method is deprecated.
-            IPAddress ipAddress = ipHostInfo.AddressList[1];
-            QrCodeInfo = QrGenerator.CreateQrCode("https://" + ipAddress.ToString() + "/ThanhToans/Details/" + xe.TheXeNgay.MaThanhToan.ToString(), QRCodeGenerator.ECCLevel.Q);
+            QrCodeInfo = QrGenerator.CreateQrCode("https://" + GlobalData.initIP() + "/ThanhToans/Details/" + xe.TheXeNgay.MaThanhToan.ToString(), QRCodeGenerator.ECCLevel.Q);
             QrCode = new QRCode(QrCodeInfo);
             QrBitmap = QrCode.GetGraphic(60);
             BitmapArray = QrBitmap.BitmapToByteArray();
@@ -196,8 +194,6 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
             // save to db
             db.SaveChanges();
 
-
-
             // Ma the xe
             QRCodeGenerator QrGenerator = new QRCodeGenerator();
             QRCodeData QrCodeInfo = QrGenerator.CreateQrCode(theXeThang.MaTheXeThang.ToString(), QRCodeGenerator.ECCLevel.Q);
@@ -205,11 +201,10 @@ namespace BaiGiuXeTuDong_KhoaLuanTotNghiep.Controllers
             Bitmap QrBitmap = QrCode.GetGraphic(60);
             byte[] BitmapArray = QrBitmap.BitmapToByteArray();
             ViewBag.QRCodeTheXe = string.Format("data:image/png;base64,{0}", Convert.ToBase64String(BitmapArray));
+
             // ma thanh toan
             QrGenerator = new QRCodeGenerator();
-            IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName()); // `Dns.Resolve()` method is deprecated.
-            IPAddress ipAddress = ipHostInfo.AddressList[1];
-            QrCodeInfo = QrGenerator.CreateQrCode("https://" + ipAddress.ToString() + "/ThanhToans/Details/" + xe.TheXeNgay.MaThanhToan.ToString(), QRCodeGenerator.ECCLevel.Q);
+            QrCodeInfo = QrGenerator.CreateQrCode("https://" + GlobalData.initIP() + "/ThanhToans/Details/" + xe.TheXeNgay.MaThanhToan.ToString(), QRCodeGenerator.ECCLevel.Q);
             QrCode = new QRCode(QrCodeInfo);
             QrBitmap = QrCode.GetGraphic(60);
             BitmapArray = QrBitmap.BitmapToByteArray();
