@@ -5,108 +5,69 @@
     Layout = "~/Views/Shared/_LayoutKhachHang.cshtml";
 }
 <style>
-    dd{
-        width: 48%;
+    label {
+        color: #55ccee;
     }
 </style>
+
 <div>
     <h4>Thanh Toán</h4>
-    <hr />       
-    <dl class="dl-horizontal">
-        <dt>
-            Tên Khách hàng
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HoTenKH)
-        </dd>
-
-        <dt>
-            Biển số xe
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BienSoXe)
-        </dd>
-
-        <dt>
-            Thời gian đăng ký
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ThoiGianDangKy)
-        </dd>
-
-        <dt>
-            Loại Xe
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LoaiXe)
-        </dd>
-
-
-        <dt>
-            Số điện thoại
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SDT)
-        </dd>
-
-        <dt>
-            Email
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            Thời hạn
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ThoiHan)
-        </dd>
-
-        <dt>
-            Loại hình thanh toán
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LoaiThanhToan.TenLoai)
-        </dd>
-
-        <dt>
-            Mã thanh toán
-        </dt>
-
-        <dd>
+    <hr />
+    <div class="col-sm-4">
+        <div class="row">
+            <label>Tên khách hàng:</label>
+            <p>@Html.DisplayFor(model => model.HoTenKH)</p>
+        </div>
+        <div class="row">
+            <label>Biển số xe: </label>
+            <p>@Html.DisplayFor(model => model.BienSoXe)</p>
+        </div>
+        <div class="row">
+            <label>Thời gian đăng ký: </label>
+            <p>@Html.DisplayFor(model => model.ThoiGianDangKy)</p>
+        </div>
+        <div class="row">
+            <label>Loại Xe: </label>
+            <p>@Html.DisplayFor(model => model.LoaiXe)</p>
+        </div>
+        <div class="row">
+            <label>Số điện thoại: </label>
+            <p>@Html.DisplayFor(model => model.SDT)</p>
+        </div>
+        <div class="row">
+            <label>Email: </label>
+            <p>@Html.DisplayFor(model => model.Email)</p>
+        </div>
+        <div class="row">
+            <label>Thời hạn: </label>
+            <p>@Html.DisplayFor(model => model.ThoiHan)</p>
+        </div>
+        <div class="row">
+            <label>Loại hình thanh toán: </label>
+            <p>@Html.DisplayFor(model => model.LoaiThanhToan.TenLoai)</p>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="row">
+            <label>Mã thanh toán: </label>
             <img id="img_bc" src="@ViewBag.QRCodeThanhToan" style="width: 320px; height: 320px; border: groove 1px; " />
-
-        </dd>
-
-        <dt>
-            Mã thẻ xe
-        </dt>
-
-        <dd>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="row">
+            <label>Mã thẻ xe: </label>
             <img id="img_thexe" style="width: 320px; height: 320px; border: groove 1px; " />
             <p id="maTheXe"></p>
-        </dd>
-        <hr />
-        <dt>
-            Trạng thái
-        </dt>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <label>Trạng thái: </label>
+        <button class="btn btn-info" onclick="kiem_tra_thanh_toan()"> Kiểm tra trạng thái</button>
+        <p id="trang_thai" style="margin-top: 10px;"></p>
+    </div>
 
-        <dd>
-            <button class="btn btn-info" onclick="kiem_tra_thanh_toan()"> Kiểm tra trạng thái</button>
-            <p id="trang_thai" style="margin-top: 10px;"></p>
-        </dd>
-    </dl>
 </div>
-
 @section script{
     <script language="Javascript">
 
@@ -148,3 +109,102 @@
 
     </script>
 }
+
+@*<div>
+        <h4>Thanh Toán</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Tên Khách hàng
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HoTenKH)
+            </dd>
+
+            <dt>
+                Biển số xe
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BienSoXe)
+            </dd>
+
+            <dt>
+                Thời gian đăng ký
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ThoiGianDangKy)
+            </dd>
+
+            <dt>
+                Loại Xe
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LoaiXe)
+            </dd>
+
+
+            <dt>
+                Số điện thoại
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SDT)
+            </dd>
+
+            <dt>
+                Email
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                Thời hạn
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ThoiHan)
+            </dd>
+
+            <dt>
+                Loại hình thanh toán
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LoaiThanhToan.TenLoai)
+            </dd>
+
+            <dt>
+                Mã thanh toán
+            </dt>
+
+            <dd>
+                <img id="img_bc" src="@ViewBag.QRCodeThanhToan" style="width: 320px; height: 320px; border: groove 1px; " />
+
+            </dd>
+
+            <dt>
+                Mã thẻ xe
+            </dt>
+
+            <dd>
+                <img id="img_thexe" style="width: 320px; height: 320px; border: groove 1px; " />
+                <p id="maTheXe"></p>
+            </dd>
+            <hr />
+            <dt>
+                Trạng thái
+            </dt>
+
+            <dd>
+                <button class="btn btn-info" onclick="kiem_tra_thanh_toan()"> Kiểm tra trạng thái</button>
+                <p id="trang_thai" style="margin-top: 10px;"></p>
+            </dd>
+        </dl>
+    </div>*@
+
